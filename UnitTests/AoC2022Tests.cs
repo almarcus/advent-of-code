@@ -1,6 +1,6 @@
 namespace UnitTests;
 
-public class Tests2022
+public class AoC2022Tests
 {
 
 }
