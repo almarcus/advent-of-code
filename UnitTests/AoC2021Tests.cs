@@ -128,7 +128,7 @@ public class AoC2021Tests
         var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day2.txt");
 
         Day2 problem = new Day2(lines);
-        Assert.Equal(1746616,problem.Solve(true));
+        Assert.Equal(1741971043,problem.Solve(true));
     }
     #endregion
 }
