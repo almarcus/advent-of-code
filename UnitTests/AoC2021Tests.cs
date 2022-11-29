@@ -76,4 +76,59 @@ public class AoC2021Tests
     }
 
     #endregion
+
+    #region Day2
+    [Fact]
+    public void Day2aExample1()
+    {
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day2.txt");
+
+        Day2 problem = new Day2(lines);
+        Assert.Equal(1746616,problem.Solve());
+    }
+
+    [Fact]
+    public void Day2aSolution()
+    {
+        List<string> input = new List<string>
+                                            {
+                                            "forward 5",
+                                            "down 5",
+                                            "forward 8",
+                                            "up 3",
+                                            "down 8",
+                                            "forward 2"
+                                            };
+        
+        Day2 problem = new Day2(input);
+        Assert.Equal(150,problem.Solve());
+    }
+
+    [Fact]
+    public void Day2bExample1()
+    {
+        List<string> input = new List<string>
+                                            {
+                                            "forward 5",
+                                            "down 5",
+                                            "forward 8",
+                                            "up 3",
+                                            "down 8",
+                                            "forward 2"
+                                            };
+        
+        Day2 problem = new Day2(input);
+        Assert.Equal(900,problem.Solve(true));
+    }
+
+
+    [Fact]
+    public void Day2bSolution()
+    {
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day2.txt");
+
+        Day2 problem = new Day2(lines);
+        Assert.Equal(1741971043,problem.Solve(true));
+    }
+    #endregion
 }
