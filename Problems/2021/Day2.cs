@@ -23,40 +23,49 @@ public class Day2
         }
     }
 
-    List<Movement> Movements = new List<Movement>();
-    int Aim = 0;
+    List<Movement> movements = new List<Movement>();
+    int aim = 0;
     Point position = new Point();
 
     public Day2(List<string> input)
     {
         foreach(string movement in input)
         {
-            Movements.Add(new Movement(movement));
+            movements.Add(new Movement(movement));
         }
     }
 
-    private void Move(Movement movement)
+    private void Move(Movement movement, bool useAim)
     {
         switch (movement.Direction){
-            case Directions.Forward:
-                position.Offset(movement.Magnitude,0);
+            case Directions.Down:
+                if(!useAim) 
+                    position.Offset(0, movement.Magnitude);
+                aim += movement.Magnitude;
                 break;
             case Directions.Up:
-                position.Offset(0, movement.Magnitude);
+                if (!useAim) 
+                    position.Offset(0, -movement.Magnitude);
+                aim -= movement.Magnitude;
                 break;
-            case Directions.Down:
-                position.Offset(0, -movement.Magnitude);
+            case Directions.Forward:
+                if (useAim)
+                    position.Offset(movement.Magnitude, movement.Magnitude * aim);
+                else
+                    position.Offset(movement.Magnitude, 0);
                 break;
         }
     }
 
-    public int Solve()
+    public int Solve(bool useAim = false)
     {
-        foreach (Movement movement in Movements){
-            Move(movement);
+        position = new Point();
+        aim = 0;
+        foreach (Movement movement in movements){
+            Move(movement, useAim);
         }
 
-        return Math.Abs(position.X * position.Y);
+        return position.X * position.Y;
     }
     
 }

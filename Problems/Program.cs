@@ -23,6 +23,8 @@ switch (Utility.ParseAoCDate(year_and_day))
     case var t when t.year == 2021 && t.day == 2:
         Console.WriteLine("What window would you like to apply?");
         var day2 = new AOC2021.Day2(input);
-        Console.WriteLine($"The answer is: {day2.Solve()}");
+        
+        Console.WriteLine($"The answer without aiming is: {day2.Solve(false)}");
+        Console.WriteLine($"The answer with aiming is: {day2.Solve(true)}");
         break;
 }
