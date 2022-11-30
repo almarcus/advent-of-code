@@ -247,7 +247,7 @@ string input =
         Day4 problem = new Day4(input);
 
         Assert.Equal(100,problem.Boards.Count);
-        Assert.Equal(4512, problem.Solve());
+        Assert.Equal(33462, problem.Solve());
     }
 
 }
