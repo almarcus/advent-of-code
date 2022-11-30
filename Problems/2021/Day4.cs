@@ -23,6 +23,7 @@ public class Day4
     {
         List<Square> Squares = new List<Square>();
         
+        public int WinningNumber;
         
         public Board(List<string> input)
         {
@@ -43,6 +44,8 @@ public class Day4
             {
                 if (s.Value == pickedNumber) s.Picked = true;
             }
+
+            if (IsWinner) WinningNumber = pickedNumber;
         }
 
         public bool IsWinner
@@ -67,7 +70,9 @@ public class Day4
             return null;
         }
 
-        public int? GetWinningSum => Squares.Where(x => !x.Picked).Sum(x => x.Value);
+        public int? WinningSum => Squares.Where(x => !x.Picked).Sum(x => x.Value);
+
+        public int? WinningScore => WinningSum * WinningNumber;
     }
 
     public List<Board> Boards = new List<Board>();
@@ -95,17 +100,20 @@ public class Day4
 
     }
 
-    public int Solve()
+    public int Solve(bool getWinningBoard = true)
     {
+        List<Board> boardWinners = new();
         foreach (string chosenNumber in chosenNumbers)
         {
             int convertedNumber = Int32.Parse(chosenNumber);
             MarkBoards(convertedNumber);
-            int? winningSum = Boards.FirstOrDefault(b => b.IsWinner)?.GetWinningSum;
-            if (winningSum.HasValue) return winningSum.Value * convertedNumber;
+
+            boardWinners.AddRange(Boards.Where(b => b.IsWinner && b.WinningNumber == convertedNumber));
         }
 
-        return 0;
+        
+        if (getWinningBoard) return boardWinners.First().WinningScore.Value;
+        else return boardWinners.Last().WinningScore.Value;
 
         
     }

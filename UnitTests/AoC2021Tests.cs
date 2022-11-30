@@ -240,14 +240,33 @@ string input =
     }
 
     [Fact]
-    public void Day4aSolution()
+    public void Day4aCheckCorrectNumberOfBoards()
     {
         string input = Utility.ReadFile(@"2021/Inputs/Day4.txt");
 
         Day4 problem = new Day4(input);
 
         Assert.Equal(100,problem.Boards.Count);
-        Assert.Equal(33462, problem.Solve());
+    }
+
+    [Fact]
+    public void Day4aSolution()
+    {
+        string input = Utility.ReadFile(@"2021/Inputs/Day4.txt");
+
+        Day4 problem = new Day4(input);
+
+        Assert.Equal(33462, problem.Solve(true));
+    }
+
+    [Fact]
+    public void Day4bSolution()
+    {
+        string input = Utility.ReadFile(@"2021/Inputs/Day4.txt");
+
+        Day4 problem = new Day4(input);
+
+        Assert.Equal(30070, problem.Solve(false));
     }
 
 }
