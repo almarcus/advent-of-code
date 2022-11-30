@@ -131,4 +131,81 @@ public class AoC2021Tests
         Assert.Equal(1741971043,problem.Solve(true));
     }
     #endregion
+
+    #region Day3
+    
+    [Theory]
+    [InlineData("00000","11111")]
+    [InlineData("11111","00000")]
+    [InlineData("0","1")]
+    [InlineData("10101","01010")]
+    public void FlippedBitsTests(string inputBinary, string expectedFlippedBinary)
+    {
+        Assert.Equal(expectedFlippedBinary, Day3.FlipBits(inputBinary));
+    }
+
+    [Fact]
+    public void MostCommonCharacterTest()
+    {
+        List<string> input = new List<string>
+        {
+            "0",
+            "1"
+        };
+
+        Assert.Equal('1', Day3.GetMostCommonCharacterInPosition(input,0));
+    }
+
+    [Fact]
+    public void Day3Example1()
+    {
+        List<string> input = new List<string>
+        {
+            "00100",
+            "11110",
+            "10110",
+            "10111",
+            "10101",
+            "01111",
+            "00111",
+            "11100",
+            "10000",
+            "11001",
+            "00010",
+            "01010"
+        };
+
+        Day3 problem = new Day3(input);
+
+        Assert.Equal("10110",problem.gammaRateBinary);
+        Assert.Equal("01001",problem.epsilonRateBinary);
+        Assert.Equal(22,problem.gammaRate);
+        Assert.Equal(9,problem.epsilonRate);
+        Assert.Equal(198, problem.Solve().powerConsumption);
+        Assert.Equal("10111", problem.oxygenGeneratorBinary);
+        Assert.Equal("01010", problem.co2ScrubberBinary);
+        Assert.Equal(23, problem.oxygenGeneratorRating);
+        Assert.Equal(10, problem.co2ScrubberRating);
+        Assert.Equal(230, problem.Solve().lifeSupportRating);
+    }
+
+    [Fact]
+    public void Day3aSolution(){
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day3.txt");
+
+        Day3 problem = new Day3(lines);
+
+        Assert.Equal(3847100, problem.Solve().powerConsumption);
+    }
+
+    [Fact]
+    public void Day3bSolution(){
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day3.txt");
+
+        Day3 problem = new Day3(lines);
+
+        Assert.Equal(4105235, problem.Solve().lifeSupportRating);
+    }
+    
+    #endregion
 }
