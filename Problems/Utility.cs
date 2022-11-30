@@ -7,6 +7,10 @@ public partial class Utility
         return File.ReadAllLines(path).ToList();
     }
 
+    public static string ReadFile(string path){
+        return File.ReadAllText(path);
+    }
+
     public static (int year, int day) ParseAoCDate(string input)
     {
         string[] split_inputs = input.Split('.');
