@@ -27,4 +27,9 @@ switch (Utility.ParseAoCDate(year_and_day))
         Console.WriteLine($"The answer without aiming is: {day2.Solve(false)}");
         Console.WriteLine($"The answer with aiming is: {day2.Solve(true)}");
         break;
+    case var t when t.year == 2021 && t.day == 3:
+        var day3 = new AOC2021.Day3(input);
+        Console.WriteLine($"The power consumption is {day3.Solve().powerConsumption}");
+        Console.WriteLine($"The life support rating is {day3.Solve().lifeSupportRating}");
+        break;
 }
