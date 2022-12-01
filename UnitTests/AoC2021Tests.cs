@@ -293,7 +293,7 @@ string input =
 
     }
 
-        [Fact]
+    [Fact]
     public void Day5aSolution()
     {
         List<string> input = Utility.ReadLinesFromFile(@"2021/Inputs/Day5.txt");
@@ -304,4 +304,40 @@ string input =
         Assert.Equal(5197,problem.Solve(true));
         Assert.Equal(18605,problem.Solve(false));
     }
+
+    [Theory]
+    [InlineData(0, 5)]
+    [InlineData(1, 5)]
+    [InlineData(2, 6)]
+    [InlineData(3, 7)]
+    [InlineData(4,9)]
+    [InlineData(5,10)]
+    [InlineData(6,10)]
+    [InlineData(7,10)]
+    [InlineData(8,10)]
+    [InlineData(9,11)]
+    [InlineData(18, 26)]
+    [InlineData(80, 5934)]
+    public void Day6aExample(int days, int expectedFish)
+    {
+        string input = "3,4,3,1,2";
+
+        var problem = new Day6(input);
+
+        Assert.Equal(expectedFish, problem.Solve(days));
+
+    }
+
+    [Theory]
+    [InlineData(80, 390923)]
+    [InlineData(256, 1749945484935)]
+    public void Day6aSolution(int days, int expectedFish)
+    {
+        string input = Utility.ReadFile(@"2021/Inputs/Day6.txt");
+
+        var problem = new Day6(input);
+
+        Assert.Equal(expectedFish,problem.Solve(days));
+    }
+    
 }
