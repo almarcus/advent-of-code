@@ -339,5 +339,24 @@ string input =
 
         Assert.Equal(expectedFish,problem.Solve(days));
     }
-    
+
+    [Fact]
+    public void Day7aExample()
+    {
+        string input = "16,1,2,0,4,2,7,1,2,14";
+
+        var problem = new Day7(input);
+
+        Assert.Equal(37, problem.Solve());
+    }
+
+    [Fact]
+    public void Day7aSolution()
+    {
+        string input = Utility.ReadFile(@"2021/Inputs/Day7.txt");
+
+        var problem = new Day7(input);
+
+        Assert.Equal(356922, problem.Solve());
+    }    
 }
