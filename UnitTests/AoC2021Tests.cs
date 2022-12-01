@@ -331,7 +331,7 @@ string input =
     [Theory]
     [InlineData(80, 390923)]
     [InlineData(256, 1749945484935)]
-    public void Day6aSolution(int days, int expectedFish)
+    public void Day6aSolution(int days, long expectedFish)
     {
         string input = Utility.ReadFile(@"2021/Inputs/Day6.txt");
 
