@@ -62,7 +62,7 @@ public class AoC2021Tests
     [Fact]
     public void Day1aSolution()
     {
-        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day1a.txt");
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day1.txt");
         var problem = new AOC2021.Day1(lines);
         Assert.Equal(1482, problem.Solve());
     }
@@ -70,7 +70,7 @@ public class AoC2021Tests
     [Fact]
     public void Day1bSolution()
     {
-        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day1b.txt");
+        var lines = Utility.ReadLinesFromFile(@"2021/Inputs/Day1.txt");
         var problem = new AOC2021.Day1(lines);
         Assert.Equal(1518, problem.Solve(3));
     }
