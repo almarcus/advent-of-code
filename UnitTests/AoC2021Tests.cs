@@ -347,16 +347,32 @@ string input =
 
         var problem = new Day7(input);
 
-        Assert.Equal(37, problem.Solve());
+        Assert.Equal(37, problem.Solve(false));
+        Assert.Equal(168, problem.Solve(true));
     }
 
     [Fact]
-    public void Day7aSolution()
+    public void Day7Solution()
     {
         string input = Utility.ReadFile(@"2021/Inputs/Day7.txt");
 
         var problem = new Day7(input);
 
-        Assert.Equal(356922, problem.Solve());
+        Assert.Equal(356922, problem.Solve(false));
+        Assert.Equal(100347031, problem.Solve(true));
     }    
+
+    [Theory]
+    [InlineData(16,5,66)]
+    [InlineData(1,5,10)]
+    [InlineData(2,5,6)]
+    [InlineData(0,5,15)]
+    [InlineData(4,5,1)]
+    [InlineData(7,5,3)]
+    [InlineData(14,5,45)]
+    [InlineData(1,4,6)]
+    public void CheckCostToMoveMultiplier(int start, int end, int expectedFuel)
+    {
+        Assert.Equal(expectedFuel, Day7.CostToMove(start,end,true));
+    }
 }
