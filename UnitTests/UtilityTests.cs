@@ -1,3 +1,4 @@
+using System.Drawing;
 using Utilities;
 namespace UnitTests;
 
@@ -29,5 +30,18 @@ public class UtilityTests
     public void TestInvalidArgumentAoCDates(string input)
     {
         Assert.ThrowsAny<Exception>(() => Utility.ParseAoCDate(input));
+    }
+
+    [Theory]
+    [InlineData("(0,0)",0,0)]
+    [InlineData("(-1,0)",-1,0)]
+    [InlineData("(0,-1)",0,-1)]
+    [InlineData("(-9,-8)",-9,-8)]
+    [InlineData("(8,9)",8,9)]
+    [InlineData("(01,02)",1,2)]
+    [InlineData("(-01,-02)",-1,-2)]
+    public void TestValidPointConversions(string pointToParse, int x, int y)
+    {
+        Assert.Equal(new Point(x,y), Utility.ParsePoint(pointToParse));
     }
 }

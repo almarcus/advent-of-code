@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Text.RegularExpressions;
 
 namespace Utilities;
@@ -18,5 +19,11 @@ public partial class Utility
             return (int.Parse(split_inputs[0]), int.Parse(split_inputs[1]));
         else
             throw new ArgumentException("Input parameter is not a valid format", nameof(input));
+    }
+
+    public static Point ParsePoint(string input)
+    {
+        List<int> coordinates = input.TrimStart('(').TrimEnd(')').Split(',').Select(x => Int32.Parse(x)).ToList();
+        return new Point(coordinates[0], coordinates[1]);
     }
 }
