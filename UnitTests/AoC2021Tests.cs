@@ -269,4 +269,39 @@ string input =
         Assert.Equal(30070, problem.Solve(false));
     }
 
+    [Fact]
+    public void Day5aExample()
+    {
+        List<string> input = new()
+        { 
+            "0,9 -> 5,9",
+            "8,0 -> 0,8",
+            "9,4 -> 3,4",
+            "2,2 -> 2,1",
+            "7,0 -> 7,4",
+            "6,4 -> 2,0",
+            "0,9 -> 2,9",
+            "3,4 -> 1,4",
+            "0,0 -> 8,8",
+            "5,5 -> 8,2"
+        };
+
+        var problem = new Day5(input);
+
+        Assert.Equal(5,problem.Solve(true));
+        Assert.Equal(12,problem.Solve(false));
+
+    }
+
+        [Fact]
+    public void Day5aSolution()
+    {
+        List<string> input = Utility.ReadLinesFromFile(@"2021/Inputs/Day5.txt");
+
+
+        var problem = new Day5(input);
+
+        Assert.Equal(5197,problem.Solve(true));
+        Assert.Equal(18605,problem.Solve(false));
+    }
 }
