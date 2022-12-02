@@ -25,5 +25,43 @@ public class AoC2022Tests
         Assert.Equal(212489, problem.Solve(3));
     }
 
+    [Fact]
+    public void Day2aExample()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
 
+        var problem = new Day2(input);
+
+        Assert.Equal(15, problem.Solve());
+    }
+
+    [Fact]
+    public void Day2aSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
+
+        var problem = new Day2(input);
+
+        Assert.Equal(11386, problem.Solve());
+    }
+
+    [Fact]
+    public void Day2bExample()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
+
+        var problem = new Day2(input, false);
+
+        Assert.Equal(12, problem.Solve());
+    }
+
+    [Fact]
+    public void Day2bSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
+
+        var problem = new Day2(input, false);
+
+        Assert.Equal(13600, problem.Solve());
+    }
 }
