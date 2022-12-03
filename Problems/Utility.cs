@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 
 namespace Utilities;
-public partial class Utility
+public static class Utility
 {
     public static List<string> ReadLinesFromFile(string path){
         return File.ReadAllLines(path).ToList();
@@ -25,5 +25,13 @@ public partial class Utility
     {
         List<int> coordinates = input.TrimStart('(').TrimEnd(')').Split(',').Select(x => Int32.Parse(x)).ToList();
         return new Point(coordinates[0], coordinates[1]);
+    }
+
+    public static int Priority(this char input)
+    {
+        char flippedCase = char.IsUpper(input) ? char.ToLower(input) : char.ToUpper(input);
+        int offset = char.IsUpper(flippedCase) ? 64 : 64+6;
+
+        return (int)flippedCase - offset;
     }
 }

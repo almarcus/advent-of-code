@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.InteropServices;
 using Utilities;
 namespace UnitTests;
 
@@ -44,4 +45,15 @@ public class UtilityTests
     {
         Assert.Equal(new Point(x,y), Utility.ParsePoint(pointToParse));
     }
+
+    [Theory]
+    [InlineData('A', 27)]
+    [InlineData('a', 1)]
+    [InlineData('Z', 52)]
+    [InlineData('z', 26)]
+    public void TestCustomAsciiConverter(char input, int expectedValue)
+    {
+        Assert.Equal(expectedValue, input.Priority());
+    }
+    
 }
