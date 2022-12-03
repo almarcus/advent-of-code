@@ -64,4 +64,41 @@ public class AoC2022Tests
 
         Assert.Equal(13600, problem.Solve());
     }
+
+    [Theory]
+    [InlineData("aa",'a', 1)]
+    [InlineData("vJrwpWtwJgWrhcsFMMfFFhFp",'p',16)]
+    [InlineData("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",'L',38)]
+    [InlineData("PmmdzqPrVvPwwTWBwg",'P',42)]
+    [InlineData("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",'v',22)]
+    [InlineData("ttgJtRGJQctTZtZT",'t',20)]
+    [InlineData("CrZsJsPPZsGzwwsLwLmpwMDw",'s',19)]
+    
+    public void CheckRucksackProperties(string rucksackItems, char expectedCommonItem, int expectedPriority)
+    {
+        var rucksack = new Rucksack(rucksackItems);
+
+        Assert.Equal(expectedCommonItem, rucksack.CommonItem);
+        Assert.Equal(expectedPriority, rucksack.Priority);
+    }
+
+    [Fact]
+    public void Day3Example()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day3Example.txt");
+
+        var problem = new Day3(input);
+
+        Assert.Equal(157, problem.Solve());
+    }
+
+    [Fact]
+    public void Day3Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day3.txt");
+
+        var problem = new Day3(input);
+
+        Assert.Equal(7990, problem.Solve());
+    }
 }
