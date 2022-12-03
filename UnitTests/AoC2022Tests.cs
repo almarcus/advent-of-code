@@ -83,7 +83,7 @@ public class AoC2022Tests
     }
 
     [Fact]
-    public void Day3Example()
+    public void Day3aExample()
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day3Example.txt");
 
@@ -93,6 +93,17 @@ public class AoC2022Tests
     }
 
     [Fact]
+    public void Day3bExample()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day3Example.txt");
+
+        var problem = new Day3(input);
+
+        Assert.Equal(70, problem.SolveWithBuckets(3));
+    }
+
+
+    [Fact]
     public void Day3Solution()
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day3.txt");
@@ -100,5 +111,7 @@ public class AoC2022Tests
         var problem = new Day3(input);
 
         Assert.Equal(7990, problem.Solve());
+        Assert.Equal(2602, problem.SolveWithBuckets(3));
     }
+
 }
