@@ -55,5 +55,20 @@ public class UtilityTests
     {
         Assert.Equal(expectedValue, input.Priority());
     }
+
+    [Theory]
+    [InlineData(1,3,3)]
+    [InlineData(1,1,1)]
+    [InlineData(0,1,2)]
+    [InlineData(-3,3,7)]
+    [InlineData(-3,-1,3)]
+    public void TestRangeUtility(int start, int end, int expectedElements)
+    {
+        var range = Utility.Range(start, end);
+        
+        Assert.Equal(expectedElements, range.Count());
+        Assert.Equal(start, range.First());
+        Assert.Equal(end, range.Last());
+    }
     
 }
