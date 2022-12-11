@@ -29,10 +29,11 @@ public class Day4
         }
     }
 
-    public int Solve()
+    public int Solve(bool onlyPartialOverlaps)
     {
-        return ElfPairs.Where(x => (x.elf1.Sections.Intersect(x.elf2.Sections).Count() == x.elf1.Sections.Count
-                                || x.elf2.Sections.Intersect(x.elf1.Sections).Count() == x.elf2.Sections.Count)).Count();
+        return onlyPartialOverlaps ? ElfPairs.Where(x => x.elf1.Sections.Intersect(x.elf2.Sections).Any()).Count() 
+                                   :  ElfPairs.Where(x => (x.elf1.Sections.Intersect(x.elf2.Sections).Count() == x.elf1.Sections.Count
+                                                        || x.elf2.Sections.Intersect(x.elf1.Sections).Count() == x.elf2.Sections.Count)).Count();
     }
     
 }

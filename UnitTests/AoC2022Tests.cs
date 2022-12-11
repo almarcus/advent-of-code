@@ -125,7 +125,8 @@ public class AoC2022Tests
         Assert.Equal(3, problem.ElfPairs[0].elf1.Sections.Count);
         Assert.Equal(3, problem.ElfPairs[0].elf2.Sections.Count);
 
-        Assert.Equal(2, problem.Solve());
+        Assert.Equal(2, problem.Solve(false));
+        Assert.Equal(4, problem.Solve(true));
     }
 
     [Fact]
@@ -137,6 +138,7 @@ public class AoC2022Tests
 
         Assert.Equal(1000, problem.ElfPairs.Count);
         
-        Assert.Equal(550, problem.Solve());
+        Assert.Equal(550, problem.Solve(false));
+        Assert.Equal(550, problem.Solve(true));
     }
 }
