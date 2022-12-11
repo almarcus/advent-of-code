@@ -114,4 +114,31 @@ public class AoC2022Tests
         Assert.Equal(2602, problem.SolveWithBuckets(3));
     }
 
+    [Fact]
+    public void Day4Example()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day4Example.txt");
+
+        var problem = new Day4(input);
+
+        Assert.Equal(6, problem.ElfPairs.Count);
+        Assert.Equal(3, problem.ElfPairs[0].elf1.Sections.Count);
+        Assert.Equal(3, problem.ElfPairs[0].elf2.Sections.Count);
+
+        Assert.Equal(2, problem.Solve(false));
+        Assert.Equal(4, problem.Solve(true));
+    }
+
+    [Fact]
+    public void Day4Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day4.txt");
+
+        var problem = new Day4(input);
+
+        Assert.Equal(1000, problem.ElfPairs.Count);
+        
+        Assert.Equal(550, problem.Solve(false));
+        Assert.Equal(931, problem.Solve(true));
+    }
 }

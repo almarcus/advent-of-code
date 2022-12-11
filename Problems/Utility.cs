@@ -34,4 +34,9 @@ public static class Utility
 
         return (int)flippedCase - offset;
     }
+
+    public static IEnumerable<int> Range(int start, int end)
+    {
+        return Enumerable.Range(start, Math.Abs(end - start) + 1);
+    }
 }
