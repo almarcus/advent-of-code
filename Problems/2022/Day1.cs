@@ -16,16 +16,17 @@ public class Day1
     {
         return elves.OrderByDescending(x => x.TotalCalories).Take(numberOfElvesToCheck).Sum(x => x.TotalCalories);
     }
-}
 
-public class Elf
-{
-    List<int> foodCalories = new();
-
-    public int TotalCalories => foodCalories.Sum();
-
-    public Elf(string foodCarried)
+    class Elf
     {
-        foodCalories = foodCarried.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList();
+        List<int> foodCalories = new();
+
+        public int TotalCalories => foodCalories.Sum();
+
+        public Elf(string foodCarried)
+        {
+            foodCalories = foodCarried.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList();
+        }
     }
 }
+
