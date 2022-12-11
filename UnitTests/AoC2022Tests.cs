@@ -141,4 +141,25 @@ public class AoC2022Tests
         Assert.Equal(550, problem.Solve(false));
         Assert.Equal(931, problem.Solve(true));
     }
+
+    [Theory]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb",7)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz",5)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg",6)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",10)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw",11)]
+    public void Day6Example(string input, int expectedResult)
+    {
+        Assert.Equal(expectedResult, Day6.Solve(input, 4));
+    }
+
+    [Fact]
+    public void Day6Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day6.txt");
+
+        Assert.Equal(1833, Day6.Solve(input, 4));
+        Assert.Equal(3425, Day6.Solve(input, 14));
+    }
+    
 }
