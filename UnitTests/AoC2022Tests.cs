@@ -139,6 +139,6 @@ public class AoC2022Tests
         Assert.Equal(1000, problem.ElfPairs.Count);
         
         Assert.Equal(550, problem.Solve(false));
-        Assert.Equal(550, problem.Solve(true));
+        Assert.Equal(931, problem.Solve(true));
     }
 }
