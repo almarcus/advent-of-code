@@ -286,7 +286,37 @@ public class AoC2022Tests
 
         Assert.Equal(14820, problem.Solve());
 
+
     }
-    
+
+    [Theory]
+    [InlineData(0, "##..##..##..##..##..##..##..##..##..##..")]
+    [InlineData(1, "###...###...###...###...###...###...###.")]
+    [InlineData(2, "####....####....####....####....####....")]
+    [InlineData(3, "#####.....#####.....#####.....#####.....")]
+    [InlineData(4, "######......######......######......####")]
+    [InlineData(5, "#######.......#######.......#######.....")]
+    public void Day10Example2Drawings(int lineNumber, string expectedOutput)
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day10Example2.txt");
+
+        var problem = new Day10(input);
+
+        var drawing = problem.Draw();
+
+        Assert.Equal(expectedOutput, drawing[lineNumber]);
+    }
+
+    [Fact]
+    public void Day10Part2Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day10.txt");
+
+        var problem = new Day10(input);
+
+        var drawing = problem.Draw();
+
+        Assert.Equal("###..####.####.#..#.####.####.#..#..##..\n#..#....#.#....#.#..#....#....#..#.#..#.\n#..#...#..###..##...###..###..####.#..#.\n###...#...#....#.#..#....#....#..#.####.\n#.#..#....#....#.#..#....#....#..#.#..#.\n#..#.####.####.#..#.####.#....#..#.#..#.", string.Join(Environment.NewLine, drawing));
+    }
     
 }

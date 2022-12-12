@@ -2,6 +2,7 @@ namespace AOC2022;
 
 public class Day10
 {
+    Dictionary<int,char> CRTPixels = new Dictionary<int, char>();
 
     const int firstSpecialCycle = 20;
     const int specialCycleIncrease = 40;
@@ -64,6 +65,18 @@ public class Day10
     public int Solve()
     {
         return Cycles.Select((cycle, index) => new { cycle, CycleNumber = index+1, IsSpecial = IsSpecialCycle(index+1)}).Where(x => x.IsSpecial).Sum(x => CalculateSignalStrength(x.CycleNumber));
+    }
+
+    public List<string> Draw()
+    {
+        for (int crtPosition=0; crtPosition<240; crtPosition++)
+        {
+            var spritePosition = CalculateXValue(crtPosition);
+            var pixelCharacter = (crtPosition % 40 <= spritePosition + 1 && crtPosition % 40>= spritePosition -1) ? '#' : '.';
+            CRTPixels.Add(crtPosition+1, pixelCharacter);
+        }
+
+        return CRTPixels.Values.Chunk(40).Select(x => string.Join("", x)).ToList();
     }
 
 
