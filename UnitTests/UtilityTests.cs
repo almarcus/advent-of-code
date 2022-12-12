@@ -102,13 +102,4 @@ public class UtilityTests
         Assert.Equal(expectedDistance, point2.DistanceTo(point1));
     }
     
-    // [Theory]
-    // [InlineData(1,2,3,4,4,6)]
-    // public void TestPointAdd(int x1, int y1, int x2, int y2, int expectedX, int expectedY)
-    // {
-    //     var point1 = new Point(x1,y1);
-    //     var point2 = new Point(x2,y2);
-
-    //     Assert.Equal(new Point(expectedX, expectedY), point1.Add(point2));
-    // }
 }
