@@ -161,5 +161,24 @@ public class AoC2022Tests
         Assert.Equal(1833, Day6.Solve(input, 4));
         Assert.Equal(3425, Day6.Solve(input, 14));
     }
-    
+
+    [Fact]
+    public void Day8Example()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day8Example.txt");
+
+        var problem = new Day8(input);
+
+        Assert.Equal(21, problem.CalculateVisibleTrees());
+    }
+
+    [Fact]
+    public void Day8Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day8.txt");
+
+        var problem = new Day8(input);
+
+        Assert.Equal(1705, problem.CalculateVisibleTrees());
+    }    
 }
