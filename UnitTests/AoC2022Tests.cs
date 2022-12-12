@@ -228,5 +228,65 @@ public class AoC2022Tests
         Assert.Equal(2482,problem.Solve());
     }
 
+    [Theory]
+    [InlineData(1,1)]
+    [InlineData(2,1)]
+    [InlineData(3,4)]
+    [InlineData(4,4)]
+    [InlineData(5,-1)]
+    public void Day10Example1(int cyclesToRun, int expectedXValue)
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day10Example1.txt");
+
+        var problem = new Day10(input);
+
+        Assert.Equal(expectedXValue, problem.CalculateXValue(cyclesToRun));
+    }
+
+    [Theory]
+    [InlineData(20,420)]
+    [InlineData(60,1140)]
+    [InlineData(100,1800)]
+    [InlineData(140,2940)]
+    [InlineData(180,2880)]
+    [InlineData(220,3960)]
+    public void Day10Example2(int cycle, int expectedSignalStrength)
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day10Example2.txt");
+
+        var problem = new Day10(input);
+
+        Assert.Equal(expectedSignalStrength, problem.CalculateSignalStrength(cycle));
+
+        Assert.Equal(13140, problem.Solve());
+    }
+
+    [Theory]
+    [InlineData(1, false)]
+    [InlineData(20, true)]
+    [InlineData(30, false)]
+    [InlineData(40, false)]
+    [InlineData(50, false)]
+    [InlineData(60, true)]
+    [InlineData(100, true)]
+    [InlineData(140, true)]
+    [InlineData(180, true)]
+    [InlineData(220, true)]
+    public void Day10CheckSpecialCycle(int cycle, bool expectedSpecialIndicator)
+    {
+        Assert.Equal(expectedSpecialIndicator, Day10.IsSpecialCycle(cycle));
+    }
+
+    [Fact]
+    public void Day10Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day10.txt");
+
+        var problem = new Day10(input);
+
+        Assert.Equal(14820, problem.Solve());
+
+    }
+    
     
 }
