@@ -6,11 +6,8 @@ namespace AOC2022;
 
 public class Day9
 {
-    List<Direction> movements = new();
-
-    List<Rope> ropeHistory = new();
-
-    List<Point> tailHistory = new();
+    readonly List<Direction> movements = new();
+    readonly List<Point> tailHistory = new();
 
     Rope rope;
     
@@ -34,7 +31,7 @@ public class Day9
             return this.MemberwiseClone();
         }
 
-        private Point getMovementVector(Point head, Point tail)
+        private static Point GetMovementVector(Point head, Point tail)
         {
             Point tailMovement = new();
 
@@ -47,19 +44,15 @@ public class Day9
                 else if (head.Y < tail.Y) tailMovement.Offset(MovementVector(Direction.D));
             }
 
-            return tailMovement;
-                
+            return tailMovement;    
         }
 
         public void Move(Point movementVector)
         {
-
             Knots[0] = Knots[0].Add(movementVector);
             for (int i=1; i< Knots.Count; i++)
             {
-                Point movement = new();
-                
-                Knots[i] = Knots[i].Add(getMovementVector(Knots[i-1],Knots[i]));                    
+                Knots[i] = Knots[i].Add(GetMovementVector(Knots[i-1],Knots[i]));                    
             }
         }
     }
@@ -79,8 +72,9 @@ public class Day9
         Direction.R => new Point(1,0)
     };
 
-    public Day9(string input)
+    public Day9(string input, int knots)
     {
+        rope = new Rope(knots);
         foreach (var row in input.Split('\n', StringSplitOptions.RemoveEmptyEntries))
         {
             var movement = row.Split(' ');
@@ -95,14 +89,12 @@ public class Day9
         foreach(var movement in movements)
         {
             rope.Move(MovementVector(movement));
-            ropeHistory.Add((Rope)rope.Clone());
             tailHistory.Add(rope.Tail);
         }
     }
 
-    public int Solve(int knots)
+    public int Solve()
     {
-        rope = new Rope(knots);
         PerformMovements();
         return tailHistory.Distinct().Count();
     }

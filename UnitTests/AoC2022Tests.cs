@@ -192,9 +192,9 @@ public class AoC2022Tests
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day9Example1.txt");
 
-        var problem = new Day9(input);
+        var problem = new Day9(input, knots);
 
-        Assert.Equal(expectedResult,problem.Solve(knots));
+        Assert.Equal(expectedResult,problem.Solve());
     }
 
     [Fact]
@@ -202,9 +202,9 @@ public class AoC2022Tests
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day9Example2.txt");
 
-        var problem = new Day9(input);
+        var problem = new Day9(input, 10);
 
-        Assert.Equal(36, problem.Solve(10));
+        Assert.Equal(36, problem.Solve());
     }
 
     [Fact]
@@ -212,10 +212,9 @@ public class AoC2022Tests
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
 
-        var problem = new Day9(input);
+        var problem = new Day9(input, 2);
 
-        
-        Assert.Equal(6311,problem.Solve(2));
+        Assert.Equal(6311,problem.Solve());
     }
 
     [Fact]
@@ -223,10 +222,10 @@ public class AoC2022Tests
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
 
-        var problem = new Day9(input);
+        var problem = new Day9(input, 10);
 
         
-        Assert.Equal(2482,problem.Solve(10));
+        Assert.Equal(2482,problem.Solve());
     }
 
     
