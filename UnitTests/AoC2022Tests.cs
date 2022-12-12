@@ -319,4 +319,69 @@ public class AoC2022Tests
         Assert.Equal("###..####.####.#..#.####.####.#..#..##..\n#..#....#.#....#.#..#....#....#..#.#..#.\n#..#...#..###..##...###..###..####.#..#.\n###...#...#....#.#..#....#....#..#.####.\n#.#..#....#....#.#..#....#....#..#.#..#.\n#..#.####.####.#..#.####.#....#..#.#..#.", string.Join(Environment.NewLine, drawing));
     }
     
+    [Fact]
+    public void Day11aExample()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
+
+        var problem = new Day11(input, 3);
+
+        Assert.Equal(10605, problem.Solve(20));
+    }
+
+    [Fact]
+    public void Day11bExample()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
+
+        var problem = new Day11(input, 1);
+        
+        Assert.Equal(2713310158, problem.Solve(10000));
+    }
+
+    [Theory]
+    [InlineData(1, 2, 4, 3, 6)]
+    [InlineData(20, 99, 97, 8, 103)]
+    [InlineData(1000, 5204, 4792, 199, 5192)]
+    [InlineData(2000, 10419, 9577, 392, 10391)]
+    [InlineData(3000, 15638, 14358, 587, 15593)]
+    [InlineData(4000, 20858, 19138, 780, 20797)]
+    [InlineData(5000, 26075, 23921, 974, 26000)]
+    [InlineData(6000, 31294, 28702, 1165, 31204)]
+    [InlineData(7000, 36508, 33488, 1360, 36400)]
+    [InlineData(8000, 41728, 38268, 1553, 41606)]
+    [InlineData(9000, 46945, 43051, 1746, 46807)]
+    [InlineData(10000, 52166, 47830, 1938, 52013)]
+    public void Day11bExampleByMonkey(int rounds, int firstMonkeyExpectedInspections, int secondMonkeyExpectedInspections, int thirdMonkeyExpectedInspections, int fourthMonkeyExpectedInspections)
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
+
+        var problem = new Day11(input, 1);
+
+        problem.Solve(rounds);
+        Assert.Equal(firstMonkeyExpectedInspections, problem.Monkeys[0].Inspections);
+        Assert.Equal(secondMonkeyExpectedInspections, problem.Monkeys[1].Inspections);
+        Assert.Equal(thirdMonkeyExpectedInspections, problem.Monkeys[2].Inspections);
+        Assert.Equal(fourthMonkeyExpectedInspections, problem.Monkeys[3].Inspections);
+    }
+
+    [Fact]
+    public void Day11Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
+
+        var problem = new Day11(input, 3);
+
+        Assert.Equal(76728, problem.Solve(20));
+    }
+
+    [Fact]
+    public void Day11bSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
+
+        var problem = new Day11(input, 1);
+
+        Assert.Equal(21553910156, problem.Solve(10000));
+    }
 }
