@@ -1,4 +1,5 @@
 using System.Drawing;
+using Utilities;
 
 namespace AOC2022;
 
@@ -14,6 +15,8 @@ public class Day8
     }
 
     List<Tree> forest = new();
+
+    Point forestEdge => forest.OrderByDescending(x => x.Position.Magnitude()).First().Position;
 
     public class Tree
     {
@@ -50,10 +53,34 @@ public class Day8
 
     bool canSeeFromDirection(Tree tree, Direction direction) => GetTrees(tree.Position, direction).All(x => x.Height < tree.Height);
 
+    Tree lastTreeThatCanBeSeen(Tree tree, Direction direction)
+    {
+        var trees = GetTrees(tree.Position, direction);
+        
+        switch(direction)
+        {
+            case Direction.Up:
+            case Direction.Left:
+                trees.Reverse();
+                break;
+
+        };
+
+        return trees.FirstOrDefault(x => x.Height >= tree.Height, trees.Last());
+    }
+
+    double viewingDistance(Tree tree, Direction direction) => tree.Position.DistanceTo(lastTreeThatCanBeSeen(tree, direction).Position);
+
+    double scenicScore(Tree tree) => viewingDistance(tree, Direction.Up)
+                                   * viewingDistance(tree, Direction.Down)
+                                   * viewingDistance(tree, Direction.Left)
+                                   * viewingDistance(tree, Direction.Right);
     public int CalculateVisibleTrees() => forest.Where(tree =>  canSeeFromDirection(tree, Direction.Up) || 
                                                                 canSeeFromDirection(tree, Direction.Down) || 
                                                                 canSeeFromDirection(tree, Direction.Left) || 
                                                                 canSeeFromDirection(tree, Direction.Right)
                                                       ).Count();
+
+    public double CalculateScenicScore() => forest.Where(x => x.Position.X > 0 && x.Position.Y > 0 && x.Position.X < forestEdge.X && x.Position.Y < forestEdge.Y).Max(x => scenicScore(x));
 
 }

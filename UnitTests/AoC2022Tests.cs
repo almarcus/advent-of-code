@@ -170,6 +170,8 @@ public class AoC2022Tests
         var problem = new Day8(input);
 
         Assert.Equal(21, problem.CalculateVisibleTrees());
+        Assert.Equal(8, problem.CalculateScenicScore());
+
     }
 
     [Fact]
@@ -180,5 +182,6 @@ public class AoC2022Tests
         var problem = new Day8(input);
 
         Assert.Equal(1705, problem.CalculateVisibleTrees());
+        Assert.Equal(371200, problem.CalculateScenicScore());
     }    
 }
