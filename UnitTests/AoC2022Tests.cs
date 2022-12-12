@@ -184,4 +184,26 @@ public class AoC2022Tests
         Assert.Equal(1705, problem.CalculateVisibleTrees());
         Assert.Equal(371200, problem.CalculateScenicScore());
     }    
+
+    [Fact]
+    public void Day9Example()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day9Example.txt");
+
+        var problem = new Day9(input);
+
+        
+        Assert.Equal(13,problem.Solve());
+    }
+
+    [Fact]
+    public void Day9Solution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
+
+        var problem = new Day9(input);
+
+        
+        Assert.Equal(6311,problem.Solve());
+    }
 }
