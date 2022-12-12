@@ -39,4 +39,8 @@ public static class Utility
     {
         return Enumerable.Range(start, Math.Abs(end - start) + 1);
     }
+
+    public static double Magnitude(this Point point) => Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y,2));
+
+    public static double DistanceTo(this Point pointFrom, Point pointTo) => (new Point(pointFrom.X - pointTo.X, pointFrom.Y - pointTo.Y)).Magnitude();
 }
