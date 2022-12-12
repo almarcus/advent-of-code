@@ -8,35 +8,58 @@ public class Day9
 {
     List<Direction> movements = new();
 
-    List<Rope> ropeHistory = new List<Rope>(){ new Rope()};
+    List<Rope> ropeHistory = new();
 
-    Rope rope = new();
+    List<Point> tailHistory = new();
+
+    Rope rope;
     
     public class Rope : ICloneable
     {
-        public Point Head = new Point(0,0);
-        public Point Tail = new(0,0);
+        public Point Head => Knots.First();
+        public Point Tail => Knots.Last();
+
+        public List<Point> Knots = new();
+
+        public Rope(int knots)
+        {
+            for(int i = 1; i<= knots; i++)
+            {
+                Knots.Add(new Point());
+            }
+        }
 
         public object Clone()
         {
             return this.MemberwiseClone();
         }
 
+        private Point getMovementVector(Point head, Point tail)
+        {
+            Point tailMovement = new();
+
+            if(head.DistanceTo(tail) > Math.Sqrt(2))
+            {
+                if (head.X > tail.X) tailMovement.Offset(MovementVector(Direction.R));
+                else if (head.X < tail.X) tailMovement.Offset(MovementVector(Direction.L));
+
+                if (head.Y > tail.Y) tailMovement.Offset(MovementVector(Direction.U));
+                else if (head.Y < tail.Y) tailMovement.Offset(MovementVector(Direction.D));
+            }
+
+            return tailMovement;
+                
+        }
+
         public void Move(Point movementVector)
         {
-            Head.Offset(movementVector);
 
-            if(Head.DistanceTo(Tail) > Math.Sqrt(2))
+            Knots[0] = Knots[0].Add(movementVector);
+            for (int i=1; i< Knots.Count; i++)
             {
-                Point tailMovement = new();
-                // tailMovement = new Point(Math.MaxMagnitude(Head.X - Tail.X), (Head.Y - Tail.Y));
-                if (Head.X > Tail.X) tailMovement.Offset(MovementVector(Direction.R));
-                else if (Head.X < Tail.X) tailMovement.Offset(MovementVector(Direction.L));
-
-                if (Head.Y > Tail.Y) tailMovement.Offset(MovementVector(Direction.U));
-                else if (Head.Y < Tail.Y) tailMovement.Offset(MovementVector(Direction.D));                
+                Point movement = new();
                 
-                Tail.Offset(tailMovement);
+                Knots[i] = Knots[i].Add(getMovementVector(Knots[i-1],Knots[i]));                    
             }
         }
     }
@@ -73,12 +96,14 @@ public class Day9
         {
             rope.Move(MovementVector(movement));
             ropeHistory.Add((Rope)rope.Clone());
+            tailHistory.Add(rope.Tail);
         }
     }
 
-    public int Solve()
+    public int Solve(int knots)
     {
+        rope = new Rope(knots);
         PerformMovements();
-        return ropeHistory.Select(x => x.Tail).Distinct().Count();
+        return tailHistory.Distinct().Count();
     }
 }

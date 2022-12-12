@@ -185,25 +185,49 @@ public class AoC2022Tests
         Assert.Equal(371200, problem.CalculateScenicScore());
     }    
 
-    [Fact]
-    public void Day9Example()
+    [Theory]
+    [InlineData(2,13)]
+    [InlineData(10,1)]
+    public void Day9Example1(int knots, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9Example.txt");
+        var input = Utility.ReadFile(@"2022/Inputs/Day9Example1.txt");
 
         var problem = new Day9(input);
 
-        
-        Assert.Equal(13,problem.Solve());
+        Assert.Equal(expectedResult,problem.Solve(knots));
     }
 
     [Fact]
-    public void Day9Solution()
+    public void Day9Example2()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day9Example2.txt");
+
+        var problem = new Day9(input);
+
+        Assert.Equal(36, problem.Solve(10));
+    }
+
+    [Fact]
+    public void Day9aSolution()
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
 
         var problem = new Day9(input);
 
         
-        Assert.Equal(6311,problem.Solve());
+        Assert.Equal(6311,problem.Solve(2));
     }
+
+    [Fact]
+    public void Day9bSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
+
+        var problem = new Day9(input);
+
+        
+        Assert.Equal(2482,problem.Solve(10));
+    }
+
+    
 }
