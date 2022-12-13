@@ -261,26 +261,6 @@ public class AoC2022Tests
 
         Assert.Equal(expectedResult, string.Join(Environment.NewLine, drawing));
     }
-    
-    [Fact]
-    public void Day11aExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
-
-        var problem = new Day11(input, 3);
-
-        Assert.Equal(10605, problem.Solve(20));
-    }
-
-    [Fact]
-    public void Day11bExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
-
-        var problem = new Day11(input, 1);
-        
-        Assert.Equal(2713310158, problem.Solve(10000));
-    }
 
     [Theory]
     [InlineData(1, 2, 4, 3, 6)]
@@ -308,23 +288,17 @@ public class AoC2022Tests
         Assert.Equal(fourthMonkeyExpectedInspections, problem.Monkeys[3].Inspections);
     }
 
-    [Fact]
-    public void Day11Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day11Example.txt", 20, 3, 10605)]
+    [InlineData(@"2022/Inputs/Day11Example.txt", 10000, 1, 2713310158)]
+    [InlineData(@"2022/Inputs/Day11.txt", 20, 3, 76728)]
+    [InlineData(@"2022/Inputs/Day11.txt", 10000, 1, 21553910156)]
+    public void Day11Solutions(string filename, int rounds, int worryFactor, Int64 expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
+        var input = Utility.ReadFile(filename);
 
-        var problem = new Day11(input, 3);
+        var problem = new Day11(input, worryFactor);
 
-        Assert.Equal(76728, problem.Solve(20));
-    }
-
-    [Fact]
-    public void Day11bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
-
-        var problem = new Day11(input, 1);
-
-        Assert.Equal(21553910156, problem.Solve(10000));
+        Assert.Equal(expectedResult, problem.Solve(rounds));
     }
 }
