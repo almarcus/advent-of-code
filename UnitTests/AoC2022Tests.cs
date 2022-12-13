@@ -9,7 +9,7 @@ public class AoC2022Tests
     [InlineData(@"2022/Inputs/Day1Example.txt", 3, 45000)]
     [InlineData(@"2022/Inputs/Day1.txt", 1, 71780)]
     [InlineData(@"2022/Inputs/Day1.txt", 3, 212489)]
-    public void Day1Tests(string filename, int elvesToCheck, int expectedResult)
+    public void Day1Solutions(string filename, int elvesToCheck, int expectedResult)
     {
         var input = Utility.ReadFile(filename);
 
@@ -23,7 +23,7 @@ public class AoC2022Tests
     [InlineData(@"2022/Inputs/Day2Example.txt", false, 12)]
     [InlineData(@"2022/Inputs/Day2.txt", true, 11386)]
     [InlineData(@"2022/Inputs/Day2.txt", false, 13600)]
-    public void Day2Tests(string filename, bool secondInputIsChoice, int expectedResult)
+    public void Day2Solutions(string filename, bool secondInputIsChoice, int expectedResult)
     {
         var input = Utility.ReadFile(filename);
 
@@ -65,7 +65,7 @@ public class AoC2022Tests
     [Theory]
     [InlineData(@"2022/Inputs/Day4Example.txt", 6)]
     [InlineData(@"2022/Inputs/Day4.txt", 1000)]
-    public void Day4TestParsing(string filename, int expectedElfPairs)
+    public void Day4Parsing(string filename, int expectedElfPairs)
     {
         var input = Utility.ReadFile(filename);
 
@@ -142,23 +142,30 @@ public class AoC2022Tests
     }
 
     [Theory]
-    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb",7)]
-    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz",5)]
-    [InlineData("nppdvjthqldpwncqszvftbrmjlhg",6)]
-    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",10)]
-    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw",11)]
-    public void Day6Example(string input, int expectedResult)
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 4, 7)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", 4, 5)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", 4, 6)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 4, 10)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 4, 11)]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 14, 19)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", 14, 23)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", 14, 23)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 14, 29)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 14, 26)]
+    public void Day6Example(string input, int messageSize, int expectedResult)
     {
-        Assert.Equal(expectedResult, Day6.Solve(input, 4));
+        Assert.Equal(expectedResult, Day6.Solve(input, messageSize));
     }
 
-    [Fact]
-    public void Day6Solution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day6.txt");
+    [Theory]
+    [InlineData(@"2022/Inputs/Day6.txt", 4, 1833)]
+    [InlineData(@"2022/Inputs/Day6.txt", 14, 3425)]
 
-        Assert.Equal(1833, Day6.Solve(input, 4));
-        Assert.Equal(3425, Day6.Solve(input, 14));
+    public void Day6Solution(string filename, int messageSize, int expectedResult)
+    {
+        var input = Utility.ReadFile(filename);
+
+        Assert.Equal(expectedResult, Day6.Solve(input, messageSize));
     }
 
     [Theory]
