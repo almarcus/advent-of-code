@@ -45,6 +45,6 @@ jobs:
         hide_complexity: false
         indicators: true
         output: both
-        # thresholds: '60 80'
+        thresholds: '60 80'
     - name: Write to Job Summary
       run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
