@@ -4,65 +4,32 @@ using Utilities;
 
 public class AoC2022Tests
 {
-    [Fact]
-    public void Day1aExample()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day1Example.txt", 1, 24000)]
+    [InlineData(@"2022/Inputs/Day1Example.txt", 3, 45000)]
+    [InlineData(@"2022/Inputs/Day1.txt", 1, 71780)]
+    [InlineData(@"2022/Inputs/Day1.txt", 3, 212489)]
+    public void Day1Solutions(string filename, int elvesToCheck, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day1aExample.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day1(input);
 
-        Assert.Equal(24000, problem.Solve(1));
+        Assert.Equal(expectedResult, problem.Solve(elvesToCheck));
     }
 
-    [Fact]
-    public void Day1Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day2Example.txt", true, 15)]
+    [InlineData(@"2022/Inputs/Day2Example.txt", false, 12)]
+    [InlineData(@"2022/Inputs/Day2.txt", true, 11386)]
+    [InlineData(@"2022/Inputs/Day2.txt", false, 13600)]
+    public void Day2Solutions(string filename, bool secondInputIsChoice, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day1.txt");
+        var input = Utility.ReadFile(filename);
 
-        var problem = new Day1(input);
+        var problem = new Day2(input, secondInputIsChoice);
 
-        Assert.Equal(71780, problem.Solve(1));
-        Assert.Equal(212489, problem.Solve(3));
-    }
-
-    [Fact]
-    public void Day2aExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
-
-        var problem = new Day2(input);
-
-        Assert.Equal(15, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2aSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
-
-        var problem = new Day2(input);
-
-        Assert.Equal(11386, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2bExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
-
-        var problem = new Day2(input, false);
-
-        Assert.Equal(12, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
-
-        var problem = new Day2(input, false);
-
-        Assert.Equal(13600, problem.Solve());
+        Assert.Equal(expectedResult, problem.Solve());
     }
 
     [Theory]
@@ -74,72 +41,51 @@ public class AoC2022Tests
     [InlineData("ttgJtRGJQctTZtZT",'t',20)]
     [InlineData("CrZsJsPPZsGzwwsLwLmpwMDw",'s',19)]
     
-    public void CheckRucksackProperties(string rucksackItems, char expectedCommonItem, int expectedPriority)
+    public void Day3CheckRucksackProperties(string rucksackItems, char expectedCommonItem, int expectedPriority)
     {
-        var rucksack = new Rucksack(rucksackItems);
+        var rucksack = new Day3.Rucksack(rucksackItems);
 
         Assert.Equal(expectedCommonItem, rucksack.CommonItem);
         Assert.Equal(expectedPriority, rucksack.Priority);
     }
 
-    [Fact]
-    public void Day3aExample()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day3Example.txt", 157, 70)]
+    [InlineData(@"2022/Inputs/Day3.txt", 7990, 2602)]
+    public void Day3Solutions(string filename, int expectedPart1Result, int expectedPart2Result)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day3Example.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day3(input);
 
-        Assert.Equal(157, problem.Solve());
+        Assert.Equal(expectedPart1Result, problem.Solve());
+        Assert.Equal(expectedPart2Result, problem.SolveWithBuckets(3));
     }
 
-    [Fact]
-    public void Day3bExample()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day4Example.txt", 6)]
+    [InlineData(@"2022/Inputs/Day4.txt", 1000)]
+    public void Day4Parsing(string filename, int expectedElfPairs)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day3Example.txt");
-
-        var problem = new Day3(input);
-
-        Assert.Equal(70, problem.SolveWithBuckets(3));
-    }
-
-
-    [Fact]
-    public void Day3Solution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day3.txt");
-
-        var problem = new Day3(input);
-
-        Assert.Equal(7990, problem.Solve());
-        Assert.Equal(2602, problem.SolveWithBuckets(3));
-    }
-
-    [Fact]
-    public void Day4Example()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day4Example.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day4(input);
 
-        Assert.Equal(6, problem.ElfPairs.Count);
-        Assert.Equal(3, problem.ElfPairs[0].elf1.Sections.Count);
-        Assert.Equal(3, problem.ElfPairs[0].elf2.Sections.Count);
-
-        Assert.Equal(2, problem.Solve(false));
-        Assert.Equal(4, problem.Solve(true));
+        Assert.Equal(expectedElfPairs, problem.ElfPairs.Count);
     }
 
-    [Fact]
-    public void Day4Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day4Example.txt", false, 2)]
+    [InlineData(@"2022/Inputs/Day4Example.txt", true, 4)]
+    [InlineData(@"2022/Inputs/Day4.txt", false, 550)]
+    [InlineData(@"2022/Inputs/Day4.txt", true, 931)]
+    public void Day4Solutions(string filename, bool onlyPartialOverlaps, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day4.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day4(input);
-
-        Assert.Equal(1000, problem.ElfPairs.Count);
         
-        Assert.Equal(550, problem.Solve(false));
-        Assert.Equal(931, problem.Solve(true));
+        Assert.Equal(expectedResult, problem.Solve(onlyPartialOverlaps));
     }
 
     [Theory]
@@ -158,7 +104,7 @@ public class AoC2022Tests
     }
 
     [Fact]
-    public void Day5Example()
+    public void Day5StackParsing()
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day5Example.txt");
 
@@ -179,125 +125,86 @@ public class AoC2022Tests
         Assert.Collection(problem.Stacks[2].Crates,
             crate => Assert.Equal('P', crate)
             );
-
-        Assert.Equal("CMZ",problem.Solve(false));
-    }
-
-    [Fact]
-    public void Day5aSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
-
-        var problem = new Day5(input);
-
-        Assert.Equal("QGTHFZBHV", problem.Solve(false));
-    }
-
-    [Fact]
-    public void Day5bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
-
-        var problem = new Day5(input);
-
-        Assert.Equal("MGDMPSZTM", problem.Solve(true));
     }
 
     [Theory]
-    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb",7)]
-    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz",5)]
-    [InlineData("nppdvjthqldpwncqszvftbrmjlhg",6)]
-    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",10)]
-    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw",11)]
-    public void Day6Example(string input, int expectedResult)
+    [InlineData(@"2022/Inputs/Day5Example.txt", false, "CMZ")]
+    [InlineData(@"2022/Inputs/Day5Example.txt", true, "MCD")]
+    [InlineData(@"2022/Inputs/Day5.txt", false, "QGTHFZBHV")]
+    [InlineData(@"2022/Inputs/Day5.txt", true, "MGDMPSZTM")]
+    public void Day5Solutions(string filename, bool pickupMultiple, string expectedResult)
     {
-        Assert.Equal(expectedResult, Day6.Solve(input, 4));
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day5(input);
+
+        Assert.Equal(expectedResult, problem.Solve(pickupMultiple));
     }
 
-    [Fact]
-    public void Day6Solution()
+    [Theory]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 4, 7)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", 4, 5)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", 4, 6)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 4, 10)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 4, 11)]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 14, 19)]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", 14, 23)]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", 14, 23)]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 14, 29)]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 14, 26)]
+    public void Day6Example(string input, int messageSize, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day6.txt");
-
-        Assert.Equal(1833, Day6.Solve(input, 4));
-        Assert.Equal(3425, Day6.Solve(input, 14));
+        Assert.Equal(expectedResult, Day6.Solve(input, messageSize));
     }
 
-    [Fact]
-    public void Day8Example()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day6.txt", 4, 1833)]
+    [InlineData(@"2022/Inputs/Day6.txt", 14, 3425)]
+
+    public void Day6Solution(string filename, int messageSize, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day8Example.txt");
+        var input = Utility.ReadFile(filename);
+
+        Assert.Equal(expectedResult, Day6.Solve(input, messageSize));
+    }
+
+    [Theory]
+    [InlineData(@"2022/Inputs/Day8Example.txt", 21, 8)]
+    [InlineData(@"2022/Inputs/Day8.txt", 1705, 371200)]
+    public void Day8Solution(string filename, int expectedVisibleTrees, int expectedScenicScore)
+    {
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day8(input);
 
-        Assert.Equal(21, problem.CalculateVisibleTrees());
-        Assert.Equal(8, problem.CalculateScenicScore());
-
-    }
-
-    [Fact]
-    public void Day8Solution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day8.txt");
-
-        var problem = new Day8(input);
-
-        Assert.Equal(1705, problem.CalculateVisibleTrees());
-        Assert.Equal(371200, problem.CalculateScenicScore());
+        Assert.Equal(expectedVisibleTrees, problem.CalculateVisibleTrees());
+        Assert.Equal(expectedScenicScore, problem.CalculateScenicScore());
     }    
 
     [Theory]
-    [InlineData(2,13)]
-    [InlineData(10,1)]
-    public void Day9Example1(int knots, int expectedResult)
+    [InlineData(@"2022/Inputs/Day9Example1.txt", 2,13)]
+    [InlineData(@"2022/Inputs/Day9Example1.txt", 10,1)]
+    [InlineData(@"2022/Inputs/Day9Example2.txt", 10,36)]
+    [InlineData(@"2022/Inputs/Day9.txt", 2,6311)]
+    [InlineData(@"2022/Inputs/Day9.txt", 10,2482)]
+    public void Day9Example1(string filename, int knots, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9Example1.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day9(input, knots);
 
         Assert.Equal(expectedResult,problem.Solve());
     }
 
-    [Fact]
-    public void Day9Example2()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9Example2.txt");
-
-        var problem = new Day9(input, 10);
-
-        Assert.Equal(36, problem.Solve());
-    }
-
-    [Fact]
-    public void Day9aSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
-
-        var problem = new Day9(input, 2);
-
-        Assert.Equal(6311,problem.Solve());
-    }
-
-    [Fact]
-    public void Day9bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
-
-        var problem = new Day9(input, 10);
-
-        
-        Assert.Equal(2482,problem.Solve());
-    }
-
     [Theory]
-    [InlineData(1,1)]
-    [InlineData(2,1)]
-    [InlineData(3,4)]
-    [InlineData(4,4)]
-    [InlineData(5,-1)]
-    public void Day10Example1(int cyclesToRun, int expectedXValue)
+    [InlineData(@"2022/Inputs/Day10Example1.txt",1,1)]
+    [InlineData(@"2022/Inputs/Day10Example1.txt",2,1)]
+    [InlineData(@"2022/Inputs/Day10Example1.txt",3,4)]
+    [InlineData(@"2022/Inputs/Day10Example1.txt",4,4)]
+    [InlineData(@"2022/Inputs/Day10Example1.txt",5,-1)]
+    public void Day10XValueTests(string filename, int cyclesToRun, int expectedXValue)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day10Example1.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day10(input);
 
@@ -305,21 +212,19 @@ public class AoC2022Tests
     }
 
     [Theory]
-    [InlineData(20,420)]
-    [InlineData(60,1140)]
-    [InlineData(100,1800)]
-    [InlineData(140,2940)]
-    [InlineData(180,2880)]
-    [InlineData(220,3960)]
-    public void Day10Example2(int cycle, int expectedSignalStrength)
+    [InlineData(@"2022/Inputs/Day10Example2.txt",20,420)]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",60,1140)]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",100,1800)]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",140,2940)]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",180,2880)]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",220,3960)]
+    public void Day10SignalStrengthTests(string filename, int cycle, int expectedSignalStrength)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day10Example2.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day10(input);
 
         Assert.Equal(expectedSignalStrength, problem.CalculateSignalStrength(cycle));
-
-        Assert.Equal(13140, problem.Solve());
     }
 
     [Theory]
@@ -338,66 +243,30 @@ public class AoC2022Tests
         Assert.Equal(expectedSpecialIndicator, Day10.IsSpecialCycle(cycle));
     }
 
-    [Fact]
-    public void Day10Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day10Example2.txt",13140)]
+    [InlineData(@"2022/Inputs/Day10.txt",14820)]
+    public void Day10Part1Solutions(string filename, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day10.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day10(input);
 
-        Assert.Equal(14820, problem.Solve());
-
-
+        Assert.Equal(expectedResult, problem.Solve());
     }
 
     [Theory]
-    [InlineData(0, "##..##..##..##..##..##..##..##..##..##..")]
-    [InlineData(1, "###...###...###...###...###...###...###.")]
-    [InlineData(2, "####....####....####....####....####....")]
-    [InlineData(3, "#####.....#####.....#####.....#####.....")]
-    [InlineData(4, "######......######......######......####")]
-    [InlineData(5, "#######.......#######.......#######.....")]
-    public void Day10Example2Drawings(int lineNumber, string expectedOutput)
+    [InlineData(@"2022/Inputs/Day10Example2.txt", "##..##..##..##..##..##..##..##..##..##..\n###...###...###...###...###...###...###.\n####....####....####....####....####....\n#####.....#####.....#####.....#####.....\n######......######......######......####\n#######.......#######.......#######.....")]
+    [InlineData(@"2022/Inputs/Day10.txt", "###..####.####.#..#.####.####.#..#..##..\n#..#....#.#....#.#..#....#....#..#.#..#.\n#..#...#..###..##...###..###..####.#..#.\n###...#...#....#.#..#....#....#..#.####.\n#.#..#....#....#.#..#....#....#..#.#..#.\n#..#.####.####.#..#.####.#....#..#.#..#.")]
+    public void Day10Part2Solutions(string filename, string expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day10Example2.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day10(input);
 
         var drawing = problem.Draw();
 
-        Assert.Equal(expectedOutput, drawing[lineNumber]);
-    }
-
-    [Fact]
-    public void Day10Part2Solution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day10.txt");
-
-        var problem = new Day10(input);
-
-        var drawing = problem.Draw();
-
-        Assert.Equal("###..####.####.#..#.####.####.#..#..##..\n#..#....#.#....#.#..#....#....#..#.#..#.\n#..#...#..###..##...###..###..####.#..#.\n###...#...#....#.#..#....#....#..#.####.\n#.#..#....#....#.#..#....#....#..#.#..#.\n#..#.####.####.#..#.####.#....#..#.#..#.", string.Join(Environment.NewLine, drawing));
-    }
-    
-    [Fact]
-    public void Day11aExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
-
-        var problem = new Day11(input, 3);
-
-        Assert.Equal(10605, problem.Solve(20));
-    }
-
-    [Fact]
-    public void Day11bExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11Example.txt");
-
-        var problem = new Day11(input, 1);
-        
-        Assert.Equal(2713310158, problem.Solve(10000));
+        Assert.Equal(expectedResult, string.Join(Environment.NewLine, drawing));
     }
 
     [Theory]
@@ -426,23 +295,17 @@ public class AoC2022Tests
         Assert.Equal(fourthMonkeyExpectedInspections, problem.Monkeys[3].Inspections);
     }
 
-    [Fact]
-    public void Day11Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day11Example.txt", 20, 3, 10605)]
+    [InlineData(@"2022/Inputs/Day11Example.txt", 10000, 1, 2713310158)]
+    [InlineData(@"2022/Inputs/Day11.txt", 20, 3, 76728)]
+    [InlineData(@"2022/Inputs/Day11.txt", 10000, 1, 21553910156)]
+    public void Day11Solutions(string filename, int rounds, int worryFactor, Int64 expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
+        var input = Utility.ReadFile(filename);
 
-        var problem = new Day11(input, 3);
+        var problem = new Day11(input, worryFactor);
 
-        Assert.Equal(76728, problem.Solve(20));
-    }
-
-    [Fact]
-    public void Day11bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day11.txt");
-
-        var problem = new Day11(input, 1);
-
-        Assert.Equal(21553910156, problem.Solve(10000));
+        Assert.Equal(expectedResult, problem.Solve(rounds));
     }
 }

@@ -2,8 +2,9 @@ using Utilities;
 
 namespace AOC2022;
 
-
-public class Rucksack
+public class Day3
+{
+    public class Rucksack
 {
 
     public string Items;
@@ -20,9 +21,6 @@ public class Rucksack
     }
 
 }
-
-public class Day3
-{
     List<Rucksack> Rucksacks = new();
 
     public Day3(string input)
