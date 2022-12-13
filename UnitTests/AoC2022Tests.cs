@@ -104,7 +104,7 @@ public class AoC2022Tests
     }
 
     [Fact]
-    public void Day5Example()
+    public void Day5StackParsing()
     {
         var input = Utility.ReadFile(@"2022/Inputs/Day5Example.txt");
 
@@ -125,28 +125,20 @@ public class AoC2022Tests
         Assert.Collection(problem.Stacks[2].Crates,
             crate => Assert.Equal('P', crate)
             );
-
-        Assert.Equal("CMZ",problem.Solve(false));
     }
 
-    [Fact]
-    public void Day5aSolution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day5Example.txt", false, "CMZ")]
+    [InlineData(@"2022/Inputs/Day5Example.txt", true, "MCD")]
+    [InlineData(@"2022/Inputs/Day5.txt", false, "QGTHFZBHV")]
+    [InlineData(@"2022/Inputs/Day5.txt", true, "MGDMPSZTM")]
+    public void Day5Solutions(string filename, bool pickupMultiple, string expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day5(input);
 
-        Assert.Equal("QGTHFZBHV", problem.Solve(false));
-    }
-
-    [Fact]
-    public void Day5bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
-
-        var problem = new Day5(input);
-
-        Assert.Equal("MGDMPSZTM", problem.Solve(true));
+        Assert.Equal(expectedResult, problem.Solve(pickupMultiple));
     }
 
     [Theory]
