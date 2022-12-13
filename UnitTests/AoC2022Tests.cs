@@ -175,46 +175,18 @@ public class AoC2022Tests
     }    
 
     [Theory]
-    [InlineData(2,13)]
-    [InlineData(10,1)]
-    public void Day9Example1(int knots, int expectedResult)
+    [InlineData(@"2022/Inputs/Day9Example1.txt", 2,13)]
+    [InlineData(@"2022/Inputs/Day9Example1.txt", 10,1)]
+    [InlineData(@"2022/Inputs/Day9Example2.txt", 10,36)]
+    [InlineData(@"2022/Inputs/Day9.txt", 2,6311)]
+    [InlineData(@"2022/Inputs/Day9.txt", 10,2482)]
+    public void Day9Example1(string filename, int knots, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9Example1.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day9(input, knots);
 
         Assert.Equal(expectedResult,problem.Solve());
-    }
-
-    [Fact]
-    public void Day9Example2()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9Example2.txt");
-
-        var problem = new Day9(input, 10);
-
-        Assert.Equal(36, problem.Solve());
-    }
-
-    [Fact]
-    public void Day9aSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
-
-        var problem = new Day9(input, 2);
-
-        Assert.Equal(6311,problem.Solve());
-    }
-
-    [Fact]
-    public void Day9bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day9.txt");
-
-        var problem = new Day9(input, 10);
-
-        
-        Assert.Equal(2482,problem.Solve());
     }
 
     [Theory]
