@@ -62,32 +62,30 @@ public class AoC2022Tests
         Assert.Equal(expectedPart2Result, problem.SolveWithBuckets(3));
     }
 
-    [Fact]
-    public void Day4Example()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day4Example.txt", 6)]
+    [InlineData(@"2022/Inputs/Day4.txt", 1000)]
+    public void Day4TestParsing(string filename, int expectedElfPairs)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day4Example.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day4(input);
 
-        Assert.Equal(6, problem.ElfPairs.Count);
-        Assert.Equal(3, problem.ElfPairs[0].elf1.Sections.Count);
-        Assert.Equal(3, problem.ElfPairs[0].elf2.Sections.Count);
-
-        Assert.Equal(2, problem.Solve(false));
-        Assert.Equal(4, problem.Solve(true));
+        Assert.Equal(expectedElfPairs, problem.ElfPairs.Count);
     }
 
-    [Fact]
-    public void Day4Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day4Example.txt", false, 2)]
+    [InlineData(@"2022/Inputs/Day4Example.txt", true, 4)]
+    [InlineData(@"2022/Inputs/Day4.txt", false, 550)]
+    [InlineData(@"2022/Inputs/Day4.txt", true, 931)]
+    public void Day4Solutions(string filename, bool onlyPartialOverlaps, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day4.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day4(input);
-
-        Assert.Equal(1000, problem.ElfPairs.Count);
         
-        Assert.Equal(550, problem.Solve(false));
-        Assert.Equal(931, problem.Solve(true));
+        Assert.Equal(expectedResult, problem.Solve(onlyPartialOverlaps));
     }
 
     [Theory]
