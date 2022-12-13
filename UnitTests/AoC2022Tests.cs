@@ -143,6 +143,67 @@ public class AoC2022Tests
     }
 
     [Theory]
+    [InlineData("move 1 from 2 to 1", 1, 2, 1)]
+    [InlineData("move 3 from 1 to 3", 3, 1, 3)]
+    [InlineData("move 2 from 2 to 1", 2, 2, 1)]
+    [InlineData("move 1 from 1 to 2", 1, 1, 2)]
+    [InlineData("move 10 from 20 to 30", 10, 20, 30)]
+    public void Day5MovementParsing(string input, int expectedNumberToMove, int expectedFromStack, int expectedToStack)
+    {
+        Day5.Movement movement = new Day5.Movement(input);
+        
+        Assert.Equal(expectedNumberToMove, movement.NumberToMove);
+        Assert.Equal(expectedFromStack, movement.FromStack);
+        Assert.Equal(expectedToStack, movement.ToStack);
+    }
+
+    [Fact]
+    public void Day5Example()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day5Example.txt");
+
+        var problem = new Day5(input);
+
+        Assert.Equal(4, problem.Movements.Count);
+        Assert.Equal(3, problem.Stacks.Count);
+
+        Assert.Collection(problem.Stacks[0].Crates,
+            crate => Assert.Equal('Z', crate),
+            crate => Assert.Equal('N', crate)
+            );
+        Assert.Collection(problem.Stacks[1].Crates,
+            crate => Assert.Equal('M', crate),
+            crate => Assert.Equal('C', crate),
+            crate => Assert.Equal('D', crate)
+            );
+        Assert.Collection(problem.Stacks[2].Crates,
+            crate => Assert.Equal('P', crate)
+            );
+
+        Assert.Equal("CMZ",problem.Solve(false));
+    }
+
+    [Fact]
+    public void Day5aSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
+
+        var problem = new Day5(input);
+
+        Assert.Equal("QGTHFZBHV", problem.Solve(false));
+    }
+
+    [Fact]
+    public void Day5bSolution()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day5.txt");
+
+        var problem = new Day5(input);
+
+        Assert.Equal("MGDMPSZTM", problem.Solve(true));
+    }
+
+    [Theory]
     [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb",7)]
     [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz",5)]
     [InlineData("nppdvjthqldpwncqszvftbrmjlhg",6)]
