@@ -4,65 +4,32 @@ using Utilities;
 
 public class AoC2022Tests
 {
-    [Fact]
-    public void Day1aExample()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day1Example.txt", 1, 24000)]
+    [InlineData(@"2022/Inputs/Day1Example.txt", 3, 45000)]
+    [InlineData(@"2022/Inputs/Day1.txt", 1, 71780)]
+    [InlineData(@"2022/Inputs/Day1.txt", 3, 212489)]
+    public void Day1Tests(string filename, int elvesToCheck, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day1aExample.txt");
+        var input = Utility.ReadFile(filename);
 
         var problem = new Day1(input);
 
-        Assert.Equal(24000, problem.Solve(1));
+        Assert.Equal(expectedResult, problem.Solve(elvesToCheck));
     }
 
-    [Fact]
-    public void Day1Solution()
+    [Theory]
+    [InlineData(@"2022/Inputs/Day2Example.txt", true, 15)]
+    [InlineData(@"2022/Inputs/Day2Example.txt", false, 12)]
+    [InlineData(@"2022/Inputs/Day2.txt", true, 11386)]
+    [InlineData(@"2022/Inputs/Day2.txt", false, 13600)]
+    public void Day2Tests(string filename, bool secondInputIsChoice, int expectedResult)
     {
-        var input = Utility.ReadFile(@"2022/Inputs/Day1.txt");
+        var input = Utility.ReadFile(filename);
 
-        var problem = new Day1(input);
+        var problem = new Day2(input, secondInputIsChoice);
 
-        Assert.Equal(71780, problem.Solve(1));
-        Assert.Equal(212489, problem.Solve(3));
-    }
-
-    [Fact]
-    public void Day2aExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
-
-        var problem = new Day2(input);
-
-        Assert.Equal(15, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2aSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
-
-        var problem = new Day2(input);
-
-        Assert.Equal(11386, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2bExample()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2aExample.txt");
-
-        var problem = new Day2(input, false);
-
-        Assert.Equal(12, problem.Solve());
-    }
-
-    [Fact]
-    public void Day2bSolution()
-    {
-        var input = Utility.ReadFile(@"2022/Inputs/Day2.txt");
-
-        var problem = new Day2(input, false);
-
-        Assert.Equal(13600, problem.Solve());
+        Assert.Equal(expectedResult, problem.Solve());
     }
 
     [Theory]
