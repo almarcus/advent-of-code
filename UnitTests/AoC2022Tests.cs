@@ -1,9 +1,18 @@
 namespace UnitTests;
 using AOC2022;
 using Utilities;
+using Xunit.Abstractions;
 
 public class AoC2022Tests
 {
+
+    private readonly ITestOutputHelper output;
+
+    public AoC2022Tests(ITestOutputHelper output)
+    {
+        this.output = output;
+    }
+
     [Theory]
     [InlineData(@"2022/Inputs/Day1Example.txt", 1, 24000)]
     [InlineData(@"2022/Inputs/Day1Example.txt", 3, 45000)]
@@ -307,5 +316,42 @@ public class AoC2022Tests
         var problem = new Day11(input, worryFactor);
 
         Assert.Equal(expectedResult, problem.Solve(rounds));
+    }
+
+    [Fact]
+    public void FileTests()
+    {
+        Day7.File top = new("/");
+        Day7.File b = new("b.txt", 14848514);
+        Day7.File c = new("c.dat", 8504156);
+        Day7.File a = new("a");
+        Day7.File f = new("f", 29116);
+        Day7.File e = new("e");
+        top.Files.Add(b);
+        top.Files.Add(c);
+        top.Files.Add(a);
+        a.Files.Add(f);
+        a.Files.Add(e);
+
+        Assert.Equal(b.Size + c.Size + a.Size, top.Size);
+        Assert.Equal(a.Size, f.Size);
+
+        Assert.Equal(b, top.GetByName("b.txt"));
+        Assert.Equal(e, top.GetByName("e"));
+
+        output.WriteLine(top.PrintStructure());
+    }
+
+    [Theory]
+    [InlineData(@"2022/Inputs/Day7Example.txt", 100000, 95437, 70000000, 24933642)]
+    [InlineData(@"2022/Inputs/Day7.txt", 100000, 1517599, 70000000, 2481982)]
+    public void Day7(string filename, int totalSize, int expectedTotalSizeLarger, int totalSpace, int expectedSmallestDirectory)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day7(input);
+
+        Assert.Equal(expectedTotalSizeLarger, problem.TotalSizeLarger(totalSize));
+        Assert.Equal(expectedSmallestDirectory,problem.FindSmallestDirectory(totalSpace, 30000000));
     }
 }
