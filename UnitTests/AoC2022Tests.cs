@@ -316,4 +316,31 @@ public class AoC2022Tests
 
         var problem = new Day7(input);
     }
+
+    [Fact]
+    public void FileTests()
+    {
+        Day7.File top = new("/");
+        Day7.File b = new("b.txt", 14848514);
+        Day7.File c = new("c.dat", 8504156);
+        Day7.File a = new("a");
+        Day7.File f = new("f", 29116);
+        Day7.File e = new("e");
+        top.Files.Add(b);
+        top.Files.Add(c);
+        top.Files.Add(a);
+        a.Files.Add(f);
+        a.Files.Add(e);
+
+        Assert.Equal(b.Size + c.Size + a.Size, top.Size);
+        Assert.Equal(a.Size, f.Size);
+
+        Assert.Equal(top.Name, top.GetParent("b.txt").Name);
+        Assert.Equal(top.Name, top.GetParent("c.dat").Name);
+        Assert.Equal(top.Name, top.GetParent("a").Name);
+        Assert.Equal(a.Name, top.GetParent("f").Name);
+
+        Assert.Equal(b, top.GetByName("b.txt"));
+        Assert.Equal(e, top.GetByName("e"));
+    }
 }

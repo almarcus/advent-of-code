@@ -1,7 +1,16 @@
 namespace AOC2022;
 
+static class NodeExtensions
+{
+    public static List<Day7.File> Descendants(this Day7.File node)
+    {
+        return node.Files.Concat(node.Files.SelectMany(n => n.Descendants())).ToList();
+    }
+}
 public class Day7
 {
+
+
 
     public class File
     {
@@ -23,7 +32,23 @@ public class Day7
 
         public File GetByName(string name)
         {
-            return Name == name ? this : Files.FirstOrDefault(x => x.GetByName(name) != null);
+
+            return Name == name ? this : this.Descendants().First(x => x.Name == name);
+            // if (Name == name)
+            //     return this;
+            // else
+            // {
+            //     foreach (File file in Files)
+            //     { 
+            //         return file.GetByName(name);
+            //         //if (file.GetByName(name).Name == name) return file;
+            //     }
+            // }
+
+
+                //return Files.Where(x => x.GetByName(name) != null).FirstOrDefault();
+                //return Files.Where(x => x.GetByName(name) != null).Select(x => x.GetByName(name)).First();
+          //  return Name == name ? this : Files.Where(x => x.GetByName(name) != null)?.First();
         }
 
         public bool IsParent(string childName)
@@ -48,64 +73,47 @@ public class Day7
         }
     }
 
-    // public class File
-    // {
-    //     public string Name;
-    //     private int size;
-
-    //     public virtual int Size()
-    //     {
-    //         return size;
-    //     }
-    //     public File(string name, int size) 
-    //     {
-    //         Name = name;
-    //         this.size = size;
-    //     }
-    // }
-    // public class Directory : File
-    // {
-    //     public List<File> Files = new();
-
-    //     public override int Size()
-    //     {
-    //         return Files.Sum(x => x.Size());
-    //     }
-
-    //     public File FindByName(string name)
-    //     {
-    //         return Files.First(x => x.Name == name);
-    //     }
-
-    //     public Directory(string name) : base(name, 0)
-    //     {
-    //     }
-    //}
+    readonly File filesystem = new("/");
+    private const string cd = "$ cd ";
+    private const string ls = "$ ls";
 
     public Day7(string input)
     {
-        // Directory top = new("/");
-        // File b = new("b.txt", 14848514);
-        // File c = new("c.dat", 8504156);
-        // Directory a = new("a");
-        // File f = new("f", 29116);
-        // top.Files.Add(b);
-        // top.Files.Add(c);
-        // top.Files.Add(a);
-        // a.Files.Add(f);
+        var commandsAndOutput = input.Split('\n');
 
-        File top = new("/");
-        File b = new("b.txt", 14848514);
-        File c = new("c.dat", 8504156);
-        File a = new("a");
-        File f = new("f", 29116);
-        top.Files.Add(b);
-        top.Files.Add(c);
-        top.Files.Add(a);
-        a.Files.Add(f);
+        string currentDirectoryName = filesystem.Name;
 
-        var parent = top.GetParent("a");
-        parent = top.GetParent("f");
-        parent = top.GetParent("b.txt");
+        foreach (string command in commandsAndOutput)
+        {
+            handleCommand(ref currentDirectoryName, command);
+        }
+
+
+    }
+
+    private void handleCommand(ref string currentDir, string command)
+    {
+        if (command.StartsWith(cd))
+        {
+            string cdArg = command[cd.Length..];
+            
+            if (cdArg == "..") 
+                currentDir = filesystem.GetParent(currentDir).Name;
+            else 
+                currentDir = filesystem.GetByName(cdArg).Name;
+        }
+        else if (command.StartsWith(ls)) {}
+        else
+        {
+            var lsOutput = command.Split(' ');
+            File fileToAdd;
+            if (lsOutput[0] == "dir")
+                fileToAdd = new(lsOutput[1]);
+            else
+                fileToAdd = new(lsOutput[1], int.Parse(lsOutput[0]));
+            
+            filesystem.GetByName(currentDir).Files.Add(fileToAdd);
+        }
+
     }
 }
