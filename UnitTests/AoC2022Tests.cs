@@ -308,4 +308,12 @@ public class AoC2022Tests
 
         Assert.Equal(expectedResult, problem.Solve(rounds));
     }
+
+    [Fact]
+    public void Day7()
+    {
+        var input = Utility.ReadFile(@"2022/Inputs/Day7Example.txt");
+
+        var problem = new Day7(input);
+    }
 }
