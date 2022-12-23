@@ -1,4 +1,6 @@
 namespace UnitTests;
+
+using System.Text.Json.Nodes;
 using AOC2022;
 using Utilities;
 using Xunit.Abstractions;
@@ -353,5 +355,40 @@ public class AoC2022Tests
 
         Assert.Equal(expectedTotalSizeLarger, problem.TotalSizeLarger(totalSize));
         Assert.Equal(expectedSmallestDirectory,problem.FindSmallestDirectory(totalSpace, 30000000));
+    }
+
+    [Theory]
+    [InlineData("[1,1,3,1,1]")]
+    [InlineData("[1,1,5,1,1]")]
+    [InlineData("[[1],[2,3,4]]")]
+    [InlineData("[[1],4]")]
+    [InlineData("[9]")]
+    [InlineData("[[8,7,6]]")]
+    [InlineData("[[4,4],4,4]")]
+    [InlineData("[[4,4],4,4,4]")]
+    [InlineData("[7,7,7,7]")]
+    [InlineData("[7,7,7]")]
+    [InlineData("[]")]
+    [InlineData("[3]")]
+    [InlineData("[[[]]]")]
+    [InlineData("[[]]")]
+    [InlineData("[1,[2,[3,[4,[5,6,7]]]],8,9]")]
+    [InlineData("[1,[2,[3,[4,[5,6,0]]]],8,9]")]    
+    public void JSONTest(string input)
+    {
+
+        var problem = new Day13(input);
+    }
+
+    [Theory]
+    //[InlineData("[1,1,3,1,1]", "[1,1,5,1,1]", true)]
+    [InlineData("[[1],[2,3,4]]", "[[1],4]", true)]
+    public void Day13PacketComparerTest(string left, string right, bool expectedInRightOrder)
+    {
+        var leftNode = JsonNode.Parse(left)!;
+        var rightNode = JsonNode.Parse(right)!;
+        Day13.Packet packet = new Day13.Packet(leftNode, rightNode);
+
+        Assert.Equal(expectedInRightOrder, packet.IsInRightOrder);
     }
 }
