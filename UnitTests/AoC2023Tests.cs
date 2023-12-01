@@ -14,15 +14,15 @@ public class AoC2023Tests
     }
 
     [Theory]
-    [InlineData(@"2023/Inputs/Day1Example.txt", 142)]
-    // [InlineData(@"2023/Inputs/Day1Example.txt", 3, 45000)]
-    // [InlineData(@"2023/Inputs/Day1.txt", 1, 71780)]
-    // [InlineData(@"2023/Inputs/Day1.txt", 3, 212489)]
-    public void Day1Solutions(string filename, int expectedResult)
+    [InlineData(@"2023/Inputs/Day1Example1.txt", false, 142)] // Part 1
+    [InlineData(@"2023/Inputs/Day1.txt", false, 55621)] // Part 1
+    [InlineData(@"2023/Inputs/Day1Example2.txt", true, 281)] // Part 2
+    [InlineData(@"2023/Inputs/Day1.txt", true, 53592)] // Part 2
+    public void Day1Solutions(string filename, bool translateSpelledOutNumbers, int expectedResult)
     {
         var input = Utility.ReadFile(filename);
 
-        var problem = new Day1(input);
+        var problem = new Day1(input, translateSpelledOutNumbers);
         Assert.Equal(expectedResult, problem.Solve());
     }
 }
