@@ -104,7 +104,8 @@ public class RockPaperScissorsGame
             {
                 Result.Draw => PlayerB.Choice,
                 Result.Win => LosesAgainst(PlayerB.Choice),
-                Result.Loss => WinsAgainst(PlayerB.Choice)
+                Result.Loss => WinsAgainst(PlayerB.Choice),
+                _ => throw new NotImplementedException()
             };
         }
 
