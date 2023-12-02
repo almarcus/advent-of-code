@@ -77,4 +77,26 @@ public class AoC2023Tests
         var problem = new Day1(input, translateSpelledOutNumbers);
         Assert.Equal(expectedResult, problem.Solve());
     }
+
+    [Theory]
+    [InlineData("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green", 1, (3+4+1+2+6+2), true)]
+    [InlineData("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue", 2, (1+2+3+4+1+1+1), true)]
+    [InlineData("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red", 3, (8+6+20+5+4+13+5+1),false)]
+    [InlineData("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red", 4, (1+3+6+3+6+3+15+14), false)]
+    [InlineData("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green", 5, (6+1+3+2+1+2), false)]
+    public void Day2TestExamplePart1(string input, int expectedGameNumber, int expectedTotalCubes, bool gamePassesTest)
+    {
+        List<Day2.Cubes> testCubes = new List<Day2.Cubes>()
+        {
+            new Day2.Cubes() { Number = 12, CubeColor = Day2.Cubes.Color.Red },
+            new Day2.Cubes() { Number = 13, CubeColor = Day2.Cubes.Color.Green },
+            new Day2.Cubes() { Number = 14, CubeColor = Day2.Cubes.Color.Blue },
+        };
+        var day2 = new Day2(input);
+        Assert.Equal(expectedGameNumber, day2.Games[0].Number);
+        var totalCubes = day2.Games[0].GameSets.Sum(gs => gs.Cubes.Count);
+        Assert.Equal(expectedTotalCubes, totalCubes);
+        Assert.Equal(gamePassesTest, day2.Games[0].Test(testCubes));
+    }
+
 }
