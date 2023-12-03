@@ -14,13 +14,20 @@ public class Day2
         }
     }
 
-    public int Solve(int testBlue, int testGreen, int testRed) => Games.Where(g => g.IsPossible(testBlue, testGreen, testRed)).Sum(g => g.Number);
+    public int Solve1(int testBlue, int testGreen, int testRed) => Games.Where(g => g.IsPossible(testBlue, testGreen, testRed)).Sum(g => g.Number);
+    public int Solve2() => Games.Sum(g => g.Power);
     public class Game
     {
         public int Number { get; set; }
         public List<GameSet> GameSets { get; set; } = new List<GameSet>();
 
         public bool IsPossible(int testBlue, int testGreen, int testRed) => GameSets.All(gs => gs.IsPossible(testBlue, testGreen, testRed));
+
+        public int MinBlue => GameSets.Max(gs => gs.BlueCubes);
+        public int MinGreen => GameSets.Max(gs => gs.GreenCubes);
+        public int MinRed => GameSets.Max(gs => gs.RedCubes);
+
+        public int Power => MinBlue * MinGreen * MinRed;
 
         public Game(string input)
         {

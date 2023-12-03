@@ -134,14 +134,15 @@ public class AoC2023Tests
     }
 
     [Theory]
-    [InlineData(@"2023/Inputs/Day2Example.txt", 14, 13, 12, 8)] // Part 1
-    [InlineData(@"2023/Inputs/Day2.txt", 14, 13, 12, 8)] // Part 1
-    public void Day2Solutions(string filename, int testBlue, int testGreen, int testRed, int expectedResult)
+    [InlineData(@"2023/Inputs/Day2Example.txt", 14, 13, 12, 8, 2286)] // Part 1
+    [InlineData(@"2023/Inputs/Day2.txt", 14, 13, 12, 2593, 54699)] // Part 1
+    public void Day2Solutions(string filename, int testBlue, int testGreen, int testRed, int expectedPart1Result, int expectedPart2Result)
     {
         var input = Utility.ReadFile(filename);
 
         var problem = new Day2(input);
-        Assert.Equal(expectedResult, problem.Solve(testBlue, testGreen, testRed));
+        Assert.Equal(expectedPart1Result, problem.Solve1(testBlue, testGreen, testRed));
+        Assert.Equal(expectedPart2Result, problem.Solve2());
     }
 
 }
