@@ -25,18 +25,18 @@ public class Day8
 
         public Tree(int x, int y, int height)
         {
-            Position = new Point(x,y);
+            Position = new Point(x, y);
             Height = height;
         }
     }
 
     public Day8(string input)
     {
-        var rows = input.Split('\n',StringSplitOptions.RemoveEmptyEntries);
+        var rows = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-        for (int row=0; row<rows.Length; row++)
+        for (int row = 0; row < rows.Length; row++)
         {
-            for (int column=0; column < rows[row].Length; column++)
+            for (int column = 0; column < rows[row].Length; column++)
             {
                 forest.Add(new Tree(column, row, rows[row][column]));
             }
@@ -49,6 +49,8 @@ public class Day8
         Direction.Down => forest.Where(trees => (trees.Position.X == position.X) && (trees.Position.Y > position.Y)).ToList(),
         Direction.Left => forest.Where(trees => (trees.Position.X < position.X) && (trees.Position.Y == position.Y)).ToList(),
         Direction.Right => forest.Where(trees => (trees.Position.X > position.X) && (trees.Position.Y == position.Y)).ToList(),
+        _ => throw new NotImplementedException()
+
     };
 
     bool canSeeFromDirection(Tree tree, Direction direction) => GetTrees(tree.Position, direction).All(x => x.Height < tree.Height);
@@ -56,8 +58,8 @@ public class Day8
     Tree lastTreeThatCanBeSeen(Tree tree, Direction direction)
     {
         var trees = GetTrees(tree.Position, direction);
-        
-        switch(direction)
+
+        switch (direction)
         {
             case Direction.Up:
             case Direction.Left:
@@ -75,9 +77,9 @@ public class Day8
                                    * viewingDistance(tree, Direction.Down)
                                    * viewingDistance(tree, Direction.Left)
                                    * viewingDistance(tree, Direction.Right);
-    public int CalculateVisibleTrees() => forest.Where(tree =>  canSeeFromDirection(tree, Direction.Up) || 
-                                                                canSeeFromDirection(tree, Direction.Down) || 
-                                                                canSeeFromDirection(tree, Direction.Left) || 
+    public int CalculateVisibleTrees() => forest.Where(tree => canSeeFromDirection(tree, Direction.Up) ||
+                                                                canSeeFromDirection(tree, Direction.Down) ||
+                                                                canSeeFromDirection(tree, Direction.Left) ||
                                                                 canSeeFromDirection(tree, Direction.Right)
                                                       ).Count();
 

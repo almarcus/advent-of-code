@@ -69,7 +69,8 @@ public class Day9
         Direction.U => new Point(0,1),
         Direction.D => new Point(0,-1),
         Direction.L => new Point(-1,0),
-        Direction.R => new Point(1,0)
+        Direction.R => new Point(1,0),
+        _ => throw new NotImplementedException()
     };
 
     public Day9(string input, int knots)

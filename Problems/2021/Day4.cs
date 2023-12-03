@@ -112,8 +112,8 @@ public class Day4
         }
 
         
-        if (getWinningBoard) return boardWinners.First().WinningScore.Value;
-        else return boardWinners.Last().WinningScore.Value;
+        if (getWinningBoard) return boardWinners.FirstOrDefault().WinningScore.Value;
+        else return boardWinners.LastOrDefault().WinningScore.Value;
 
         
     }
