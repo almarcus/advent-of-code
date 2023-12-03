@@ -125,6 +125,11 @@ public class AoC2023Tests
     [InlineData("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red", 3, 3, (8+6+20+5+4+13+5+1))]
     [InlineData("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red", 4, 3, (1+3+6+3+6+3+15+14))]
     [InlineData("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green", 5, 2, (6+1+3+2+1+2))]
+    [InlineData("Game 6: 1 red, 2 green, 6 blue; 2 green", 6, 2, (1+2+6+2))]
+    [InlineData("Game 7: 3 green, 4 blue, 1 red; 1 green, 1 blue", 7, 2, (3+4+1+1+1))]
+    [InlineData("Game 8: 5 blue, 4 red, 13 green; 5 green, 1 red", 8, 2, (5+4+13+5+1))]
+    [InlineData("Game 9: 3 green, 6 red; 3 green, 15 blue, 14 red", 9, 2, (3+6+3+15+14))]
+    [InlineData("Game 10: 2 blue, 1 red, 2 green", 10, 1, (2+1+2))]
     public void Day2TestGameParsing(string input, int expectedNumber, int expectedSets, int expectedTotalCubes)
     {
         var game = new Day2.Game(input);
