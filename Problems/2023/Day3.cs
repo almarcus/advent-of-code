@@ -38,7 +38,7 @@ public class Day3
         }
     }
 
-    public int Solve()
+    public int GetSumPartNumbers()
     {
         return Matches.Where(n => n.IsPartNumber(Symbols)).Sum(n => int.Parse(n.Data));
     }
@@ -60,7 +60,6 @@ public class Day3
             Column = column;
         }
 
-        // public SchematicData() { }
 
         public bool IsPartNumber(List<SchematicData> checks)
         {

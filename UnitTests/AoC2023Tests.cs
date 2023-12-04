@@ -158,7 +158,7 @@ public class AoC2023Tests
         var input = Utility.ReadFile(filename);
 
         var problem = new Day3(input);
-        Assert.Equal(expectedSolution, problem.Solve());
+        Assert.Equal(expectedSolution, problem.GetSumPartNumbers());
     }
 
     [Theory]
@@ -204,10 +204,10 @@ public class AoC2023Tests
         )]
     
 
-    public void Day3Examples(string input, int expectedSolution)
+    public void Day3Examples(string input, int expectedSumPartNumbers)
     {
         var problem = new Day3(input);
-        Assert.Equal(expectedSolution, problem.Solve());
+        Assert.Equal(expectedSumPartNumbers, problem.GetSumPartNumbers());
     }
 
 }
