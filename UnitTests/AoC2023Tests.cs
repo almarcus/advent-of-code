@@ -167,7 +167,7 @@ public class AoC2023Tests
 
     [Theory]
     [InlineData(@"2023/Inputs/Day4Example.txt", 13, 30)]
-    [InlineData(@"2023/Inputs/Day4.txt", 23673, 0)]
+    [InlineData(@"2023/Inputs/Day4.txt", 23673, 12263631)]
     public void Day4Solutions(string filename, double expectedPart1Result, double expectedPart2Result)
     {
         var input = Utility.ReadFile(filename);
