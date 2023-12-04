@@ -45,4 +45,14 @@ public static class Utility
     public static double DistanceTo(this Point pointFrom, Point pointTo) => (new Point(pointFrom.X - pointTo.X, pointFrom.Y - pointTo.Y)).Magnitude();
 
     public static Point Add(this Point pointStart, Point Addition) => new Point(pointStart.X + Addition.X, pointStart.Y + Addition.Y);
+
+    public static string ReplaceRecursive(this string input, string pattern, string replacement)
+    {
+        string output = input;
+        while(output.Contains(pattern))
+        {
+            output = output.Replace(pattern, replacement);
+        }
+        return output;
+    }
 }
