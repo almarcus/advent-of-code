@@ -150,4 +150,64 @@ public class AoC2023Tests
         Assert.Equal(expectedPart2Result, problem.Solve2());
     }
 
+    [Theory]
+    [InlineData(@"2023/Inputs/Day3Example.txt", 4361)]
+    [InlineData(@"2023/Inputs/Day3.txt", 4361)]
+    public void Day3Solutions(string filename, int expectedSolution)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day3(input);
+        Assert.Equal(expectedSolution, problem.Solve());
+    }
+
+    [Theory]
+    [InlineData("1!.2", 1)]
+    [InlineData("1!2", 3)]
+    [InlineData("1!2!3", 6)]
+    [InlineData("1@", 1)]
+    [InlineData("1#", 1)]
+    [InlineData("1$", 1)]
+    [InlineData("1%", 1)]
+    [InlineData("1^", 1)]
+    [InlineData("1&", 1)]
+    [InlineData("1*", 1)]
+    [InlineData("1(", 1)]
+    [InlineData("1)", 1)]
+    [InlineData("1_", 1)]
+    [InlineData("1+", 1)]
+    [InlineData("1=", 1)]
+    [InlineData("1{", 1)]
+    [InlineData("1}", 1)]
+    [InlineData("1[", 1)]
+    [InlineData("1]", 1)]
+    [InlineData("1|", 1)]
+    [InlineData("1:", 1)]
+    [InlineData("1;", 1)]
+    [InlineData("1'", 1)]
+    [InlineData("1\"", 1)]
+    [InlineData("1<", 1)]
+    [InlineData("1>", 1)]
+    [InlineData("1?", 1)]
+    [InlineData("1/", 1)]
+    [InlineData("1\\", 1)]
+    [InlineData("1~", 1)]
+    [InlineData("1`", 1)]
+    [InlineData("1-", 1)]
+    [InlineData("1.", 0)]
+    [InlineData("1,", 1)]
+    [InlineData(
+@"........936..672.........846.922........359...332......582..856........................579..93......674..740.....243.156....................
+...........%.........4=...*...*........*.......*......#....................806..481.........................*.......*.........900......$564.
+.............520........624.965....143..405.....960.............273...651...*....*.........554....139@.....38...*.........58..*...392.......
+", (936+846+922+359+332+582+740+243+156+4+806+481+900+564+624+965+405+960+139+38)
+        )]
+    
+
+    public void Day3Examples(string input, int expectedSolution)
+    {
+        var problem = new Day3(input);
+        Assert.Equal(expectedSolution, problem.Solve());
+    }
+
 }
