@@ -36,7 +36,7 @@ public class Day4
         public List<int> Numbers { get; set; } = new List<int>();
 
         public List<int> WinningNumbers { get; set; } = new List<int>();
-        
+
         public List<int> MatchingNumbers => Numbers.Intersect(WinningNumbers).ToList();
 
         public int Matches => MatchingNumbers.Count();
@@ -45,7 +45,7 @@ public class Day4
 
         public int Copies = 1;
 
-        public ScratchCard() {}
+        public ScratchCard() { }
 
         public ScratchCard(int CardNumber, List<int> numbers, List<int> winningNumbers)
         {
