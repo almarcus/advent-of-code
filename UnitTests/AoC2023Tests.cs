@@ -151,14 +151,15 @@ public class AoC2023Tests
     }
 
     [Theory]
-    [InlineData(@"2023/Inputs/Day3Example.txt", 4361)]
-    [InlineData(@"2023/Inputs/Day3.txt", 4361)]
-    public void Day3Solutions(string filename, int expectedSolution)
+    [InlineData(@"2023/Inputs/Day3Example.txt", 4361, 467835)]
+    [InlineData(@"2023/Inputs/Day3.txt", 535351, 467835)]
+    public void Day3Solutions(string filename, int expectedSumPartNumbers, int expectedSumGears)
     {
         var input = Utility.ReadFile(filename);
 
         var problem = new Day3(input);
-        Assert.Equal(expectedSolution, problem.GetSumPartNumbers());
+        Assert.Equal(expectedSumPartNumbers, problem.GetSumPartNumbers());
+        Assert.Equal(expectedSumGears, problem.GetSumGears());
     }
 
     [Theory]
@@ -196,14 +197,6 @@ public class AoC2023Tests
     [InlineData("1-", 1)]
     [InlineData("1.", 0)]
     [InlineData("1,", 1)]
-    [InlineData(
-@"........936..672.........846.922........359...332......582..856........................579..93......674..740.....243.156....................
-...........%.........4=...*...*........*.......*......#....................806..481.........................*.......*.........900......$564.
-.............520........624.965....143..405.....960.............273...651...*....*.........554....139@.....38...*.........58..*...392.......
-", (936+846+922+359+332+582+740+243+156+4+806+481+900+564+624+965+405+960+139+38)
-        )]
-    
-
     public void Day3Examples(string input, int expectedSumPartNumbers)
     {
         var problem = new Day3(input);
