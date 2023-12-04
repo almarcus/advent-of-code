@@ -102,4 +102,5 @@ public class UtilityTests
         Assert.Equal(expectedDistance, point2.DistanceTo(point1));
     }
     
+    
 }
