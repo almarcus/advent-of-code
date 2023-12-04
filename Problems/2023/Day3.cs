@@ -70,20 +70,20 @@ public class Day3
         public int GetGearRatio(List<SchematicData> checks)
         {
 
-            var hitLeft = checks.Where(c => c.Row == Row && (c.Column + c.Length + 1) == Column);  // check to the left
+            var hitLeft = checks.Where(c => c.Row == Row && Column - c.Length == c.Column);  // check to the left
             var hitRight = checks.Where(c => c.Row == Row && c.Column == Column + 1); // check to the right
-            var hitAbove = checks.Where(c => c.Row == Row - 1 && c.Column <= Column && c.Column + c.Length >= Column); // check above with diagonal
-            var hitBelow = checks.Where(c => c.Row == Row + 1 && c.Column <= Column && c.Column + c.Length >= Column); // check above with diagonal
+            var hitAbove = checks.Where(c => c.Row == Row - 1 && c.Column + c.Length >= Column && c.Column  <= Column); // check above with diagonal
+            var hitBelow = checks.Where(c => c.Row == Row + 1 && c.Column + c.Length >= Column && c.Column  <= Column); // check above with diagonal
 
-            
-            if((hitLeft.Count() + hitRight.Count() + hitAbove.Count() + hitBelow.Count()) == 2)
+
+            if ((hitLeft.Count() + hitRight.Count() + hitAbove.Count() + hitBelow.Count()) == 2)
             {
-                var product =  Math.Max(hitLeft.Sum(c => int.Parse(c.Data)), 1) *
+                var product = Math.Max(hitLeft.Sum(c => int.Parse(c.Data)), 1) *
                        Math.Max(hitRight.Sum(c => int.Parse(c.Data)), 1) *
                        Math.Max(hitAbove.Sum(c => int.Parse(c.Data)), 1) *
                        Math.Max(hitBelow.Sum(c => int.Parse(c.Data)), 1);
 
-                       return product;
+                return product;
             }
 
             return 0;
@@ -97,4 +97,3 @@ public class Day3
     }
 
 }
-
