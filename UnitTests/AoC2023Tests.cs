@@ -177,4 +177,61 @@ public class AoC2023Tests
         Assert.Equal(expectedPart2Result, problem.Solve2());
     }
 
+
+    [Theory]
+    [InlineData(0, 50, 98, 2, 0)]
+    [InlineData(0, 52, 50, 48, 0)]
+
+    [InlineData(48, 50, 98, 2, 48)]
+    [InlineData(48, 52, 50, 48, 48)]
+
+    [InlineData(50, 50, 98, 2, 50)]
+    [InlineData(50, 52, 50, 48, 52)]
+
+    [InlineData(51, 50, 98, 2, 51)]
+    [InlineData(51, 52, 50, 48, 53)]
+
+    [InlineData(97, 50, 98, 2, 97)]
+    [InlineData(97, 52, 50, 48, 99)]
+
+    [InlineData(79, 50, 98, 2, 79)]
+    [InlineData(79, 52, 50, 48, 81)]
+
+    [InlineData(14, 50, 98, 2, 14)]
+    [InlineData(14, 52, 50, 48, 14)]
+
+    [InlineData(55, 50, 98, 2, 55)]
+    [InlineData(55, 52, 50, 48, 57)]
+
+    [InlineData(13, 50, 98, 2, 13)]
+    [InlineData(13, 52, 50, 48, 13)]
+    public void Day5Mappings(int current, int destination, int source, int length, int expectedMap)
+    {
+        Day5.SourceDestinationMap sourceDestinationMap = new Day5.SourceDestinationMap(source, destination, length);
+        Assert.Equal(expectedMap, sourceDestinationMap.GetDestination(current));
+    }
+
+    [Theory]
+    [InlineData(@"2023/Inputs/Day5Example.txt", 4, 3, 4, 2, 3, 2, 2, 35)]
+    public void Day5Examples(string filename, int expectedSeeds, int expectedSoilToFertilizerMaps, int expectedFertilizerToWaterMaps, int expectedWaterToLightMaps, int expectedLightToTemperatureMaps, int expectedTemperatureToHumidityMaps, int expectedHumidityToLocationMaps, double expectedPart1Result)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day5(input);
+        Assert.Equal(expectedSeeds, problem.Maps.Count);
+        Assert.Equal(expectedSoilToFertilizerMaps, problem.SoiltoFertilizerMaps.Count);
+        Assert.Equal(expectedFertilizerToWaterMaps, problem.FertilizertoWaterMaps.Count);
+        Assert.Equal(expectedWaterToLightMaps, problem.WatertoLightMaps.Count);
+        Assert.Equal(expectedLightToTemperatureMaps, problem.LighttoTemperatureMaps.Count);
+        Assert.Equal(expectedTemperatureToHumidityMaps, problem.TemperaturetoHumidityMaps.Count);
+        Assert.Equal(expectedHumidityToLocationMaps, problem.HumiditytoLocationMaps.Count);
+
+        var part1 = problem.Solve1();
+        Assert.Equal(problem.Maps[0].ToString().ToUpper(), "Seed 79, soil 81, fertilizer 81, water 81, light 74, temperature 78, humidity 78, location 82".ToUpper());
+        Assert.Equal(problem.Maps[1].ToString().ToUpper(), "Seed 14, soil 14, fertilizer 53, water 49, light 42, temperature 42, humidity 43, location 43".ToUpper());
+        Assert.Equal(problem.Maps[2].ToString().ToUpper(), "Seed 55, soil 57, fertilizer 57, water 53, light 46, temperature 82, humidity 82, location 86".ToUpper());
+        Assert.Equal(problem.Maps[3].ToString().ToUpper(), "Seed 13, soil 13, fertilizer 52, water 41, light 34, temperature 34, humidity 35, location 35".ToUpper());
+        Assert.Equal(expectedPart1Result, part1);
+
+    }
 }

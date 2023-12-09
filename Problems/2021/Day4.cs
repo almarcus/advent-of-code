@@ -1,6 +1,5 @@
 namespace AOC2021;
 
-using System.Linq;
 public class Day4
 {
     public class Square
