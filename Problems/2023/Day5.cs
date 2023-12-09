@@ -217,7 +217,4 @@ public class Day5
             
         }
     }
-
-    // Range range = new Range(98, 99)
-    
 }
