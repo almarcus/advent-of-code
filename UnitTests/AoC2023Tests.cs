@@ -177,4 +177,16 @@ public class AoC2023Tests
         Assert.Equal(expectedPart2Result, problem.Solve2());
     }
 
+    [Theory]
+    [InlineData(@"2023/Inputs/Day6Example.txt", 288, 71503)]
+    [InlineData(@"2023/Inputs/Day6.txt", 840336, 41382569)]
+    public void Day6Solutions(string filename, int expectedPart1Result, int expectedPart2Result)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day6(input);
+        Assert.Equal(expectedPart1Result, problem.Solve1());
+        Assert.Equal(expectedPart2Result, problem.Solve2());
+    }
+
 }
