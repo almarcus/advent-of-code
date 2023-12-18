@@ -189,4 +189,33 @@ public class AoC2023Tests
         Assert.Equal(expectedPart2Result, problem.Solve2());
     }
 
+    [Theory]
+    [InlineData("rn=1", 30)]
+    [InlineData("cm-", 253)]
+    [InlineData("qp=3", 97)]
+    [InlineData("cm=2", 47)]
+    [InlineData("qp-", 14)]
+    [InlineData("pc=4", 180)]
+    [InlineData("ot=9", 9)]
+    [InlineData("ab=5", 197)]
+    [InlineData("pc-", 48)]
+    [InlineData("pc=6", 214)]
+    [InlineData("ot=7", 231)]
+    public void Day15TestSequenceHash(string input, int expectedHash)
+    {
+        var sequence = new Day15.Sequence(input);
+        Assert.Equal(expectedHash, sequence.Hash());
+    }
+
+    [Theory]
+    [InlineData(@"2023/Inputs/Day15Example.txt", 1320, 504036)]
+    [InlineData(@"2023/Inputs/Day15.txt", 0, 0)]
+    public void Day15Solutions(string filename, int expectedPart1Result, int expectedPart2Result)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day15(input);
+        Assert.Equal(expectedPart1Result, problem.Solve1());
+        Assert.Equal(expectedPart2Result, problem.Solve2());
+    }
 }
