@@ -151,6 +151,59 @@ public class AoC2023Tests
     }
 
     [Theory]
+    [InlineData(@"2023/Inputs/Day3Example.txt", 4361, 467835)]
+    [InlineData(@"2023/Inputs/Day3.txt", 535351, 0)]
+    public void Day3Solutions(string filename, int expectedSumPartNumbers, int expectedSumGears)
+    {
+        var input = Utility.ReadFile(filename);
+
+        var problem = new Day3(input);
+//        Assert.Equal(expectedSumPartNumbers, problem.GetSumPartNumbers());
+        Assert.Equal(expectedSumGears, problem.GetSumGears());
+    }
+
+    [Theory]
+    [InlineData("1!.2", 1)]
+    [InlineData("1!2", 3)]
+    [InlineData("1!2!3", 6)]
+    [InlineData("1@", 1)]
+    [InlineData("1#", 1)]
+    [InlineData("1$", 1)]
+    [InlineData("1%", 1)]
+    [InlineData("1^", 1)]
+    [InlineData("1&", 1)]
+    [InlineData("1*", 1)]
+    [InlineData("1(", 1)]
+    [InlineData("1)", 1)]
+    [InlineData("1_", 1)]
+    [InlineData("1+", 1)]
+    [InlineData("1=", 1)]
+    [InlineData("1{", 1)]
+    [InlineData("1}", 1)]
+    [InlineData("1[", 1)]
+    [InlineData("1]", 1)]
+    [InlineData("1|", 1)]
+    [InlineData("1:", 1)]
+    [InlineData("1;", 1)]
+    [InlineData("1'", 1)]
+    [InlineData("1\"", 1)]
+    [InlineData("1<", 1)]
+    [InlineData("1>", 1)]
+    [InlineData("1?", 1)]
+    [InlineData("1/", 1)]
+    [InlineData("1\\", 1)]
+    [InlineData("1~", 1)]
+    [InlineData("1`", 1)]
+    [InlineData("1-", 1)]
+    [InlineData("1.", 0)]
+    [InlineData("1,", 1)]
+    public void Day3Examples(string input, int expectedSumPartNumbers)
+    {
+        var problem = new Day3(input);
+        Assert.Equal(expectedSumPartNumbers, problem.GetSumPartNumbers());
+    }
+
+    [Theory]
     [InlineData("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53", 4, 8)]
     [InlineData("Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19", 2, 2)]
     [InlineData("Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1", 2, 2)]
