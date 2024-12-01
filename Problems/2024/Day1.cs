@@ -25,11 +25,12 @@ public class Day1(string input)
         firstColumn.Sort();
         secondColumn.Sort();
 
-        var zipped = firstColumn.Zip(secondColumn);
+        var matchedEntries = firstColumn.Zip(secondColumn);
 
-        var summedDiffs = zipped.Sum(tuple => Math.Abs(tuple.First - tuple.Second));
+        var distances = matchedEntries.Select(entry => Math.Abs(entry.First - entry.Second));
+        var summedDistances = distances.Sum();
 
-        return summedDiffs;
+        return summedDistances;
     }
 
     public int SolvePart2()
@@ -37,7 +38,8 @@ public class Day1(string input)
         var (firstColumn, secondColumn) = ParseInput(input);
         
         var secondColumnOccurrences = secondColumn.CountBy(x => x);
-        var newSum = firstColumn.Sum(x => x * secondColumnOccurrences.FirstOrDefault(y => y.Key == x).Value);
+        var similarityScores = firstColumn.Select(x => x * secondColumnOccurrences.FirstOrDefault(y => y.Key == x).Value);
+        var newSum = similarityScores.Sum();
         
         return newSum;
     }
