@@ -2,30 +2,30 @@ namespace AOC2024;
 
 public class Day1(string input)
 {
-    private List<int> list1 = [];
-    private List<int> list2 = [];
 
-    private void parseInput(string input)
+    private (List<int> FirstColumn, List<int> SecondColumn) ParseInput(string input)
     {
-        list1 = [];
-        list2 = [];
+        List<int> firstColumn = [];
+        List<int> secondColumn = [];
         var lines =  input.Split(Environment.NewLine);
         foreach (var line in lines)
         {
             var numbers = line.Split("   ").Select(int.Parse).ToList();
-            list1.Add(numbers[0]);
-            list2.Add(numbers[1]);
+            firstColumn.Add(numbers[0]);
+            secondColumn.Add(numbers[1]);
         }
+        
+        return (firstColumn, secondColumn);
     }
     
     public int SolvePart1()
     {
-        parseInput(input);
+        var (firstColumn, secondColumn) = ParseInput(input);
 
-        list1.Sort();
-        list2.Sort();
+        firstColumn.Sort();
+        secondColumn.Sort();
 
-        var zipped = list1.Zip(list2);
+        var zipped = firstColumn.Zip(secondColumn);
 
         var summedDiffs = zipped.Sum(tuple => Math.Abs(tuple.First - tuple.Second));
 
@@ -34,9 +34,10 @@ public class Day1(string input)
 
     public int SolvePart2()
     {
-        parseInput(input);
-        var groupedCount = list2.CountBy(x => x);
-        var newSum = list1.Sum(x => x * groupedCount.FirstOrDefault(y => y.Key == x).Value);
+        var (firstColumn, secondColumn) = ParseInput(input);
+        
+        var secondColumnOccurrences = secondColumn.CountBy(x => x);
+        var newSum = firstColumn.Sum(x => x * secondColumnOccurrences.FirstOrDefault(y => y.Key == x).Value);
         
         return newSum;
     }
