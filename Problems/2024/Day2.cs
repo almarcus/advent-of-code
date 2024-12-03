@@ -2,27 +2,28 @@ namespace AOC2024;
 
 public class Day2(string input)
 {
-    private Data Puzzle = new Data(input);
+    private readonly Data _puzzle = new Data(input);
     
-    public int SolvePart1() => Puzzle.Reports.Count(r => r.IsSafe);
+    public int SolvePart1() => _puzzle.Reports.Count(r => r.IsSafe);
 
     public int SolvePart2()
     {
-        int safeReports = 0;
-        foreach (var report in Puzzle.Reports)
+        var safeReports = 0;
+        foreach (var report in _puzzle.Reports)
         {
             if (report.IsSafe) safeReports++;
             else
             {
-                for (int i = 0; i < report.Levels.Count; i++)
+                for (var i = 0; i < report.Levels.Count; i++)
                 {
-                    Report reportWithRemovedIndex = new Report(string.Join(' ', report.Levels));
-                    reportWithRemovedIndex.Levels.RemoveAt(i);
-                    if (reportWithRemovedIndex.IsSafe)
-                    {
-                        safeReports++;
-                        break;
-                    }
+                    var newLevels = new List<int>(report.Levels);
+                    newLevels.RemoveAt(i);
+                    var reportWithRemovedIndex = new Report(newLevels);
+                    
+                    if (!reportWithRemovedIndex.IsSafe) continue;
+                    
+                    safeReports++;
+                    break;
                 }
             }
         }
@@ -30,22 +31,22 @@ public class Day2(string input)
         return safeReports;
     }
 
-    public class Data(string input)
+    private class Data(string input)
     {
         public List<Report> Reports { get; } = input.Split(Environment.NewLine).Select(x => new Report(x)).ToList();
     }
 
-    public class Report(string line)
+    public class Report
     {
-        public List<int> Levels { get; set; } = line.Split(' ').Select(int.Parse).ToList();
+        public List<int> Levels { get; }
 
-        public List<int> LevelSteps
+        private List<int> LevelSteps
         {
             get
             {
-                List<int> steps = new List<int>();
+                var steps = new List<int>();
                 var lastLevel = Levels.First();
-                for (int i = 1; i < Levels.Count; i++)
+                for (var i = 1; i < Levels.Count; i++)
                 {
                     var diff = lastLevel - Levels[i];
                     steps.Add(diff);
@@ -55,12 +56,15 @@ public class Day2(string input)
                 return steps;
             }
         }
-        public int MaxLevelDifference => LevelSteps.Max(x => Math.Abs(x));
-        public int MinLevelDifference => LevelSteps.Min(x => Math.Abs(x));
 
-        public bool AllIncreasingOrDecreasing => LevelSteps.TrueForAll(x => x < 0) || LevelSteps.TrueForAll(x => x > 0);
+        private int MaxLevelDifference => LevelSteps.Max(Math.Abs);
+        private int MinLevelDifference => LevelSteps.Min(Math.Abs);
+
+        private bool AllIncreasingOrDecreasing => LevelSteps.TrueForAll(x => x < 0) || LevelSteps.TrueForAll(x => x > 0);
 
         public bool IsSafe => AllIncreasingOrDecreasing && MaxLevelDifference <= 3 && MinLevelDifference >= 1;
 
+        public Report(string input) => Levels = input.Split(' ').Select(int.Parse).ToList();
+        public Report(List<int> levels) => Levels = levels;
     }
 }
