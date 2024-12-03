@@ -1,7 +1,6 @@
 namespace UnitTests;
 using AOC2023;
 using Utilities;
-using Xunit.Abstractions;
 
 public class AoC2023Tests
 {
