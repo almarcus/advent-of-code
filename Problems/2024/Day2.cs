@@ -6,6 +6,30 @@ public class Day2(string input)
     
     public int SolvePart1() => Puzzle.Reports.Count(r => r.IsSafe);
 
+    public int SolvePart2()
+    {
+        int safeReports = 0;
+        foreach (var report in Puzzle.Reports)
+        {
+            if (report.IsSafe) safeReports++;
+            else
+            {
+                for (int i = 0; i < report.Levels.Count; i++)
+                {
+                    Report reportWithRemovedIndex = new Report(string.Join(' ', report.Levels));
+                    reportWithRemovedIndex.Levels.RemoveAt(i);
+                    if (reportWithRemovedIndex.IsSafe)
+                    {
+                        safeReports++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return safeReports;
+    }
+
     public class Data(string input)
     {
         public List<Report> Reports { get; } = input.Split(Environment.NewLine).Select(x => new Report(x)).ToList();
